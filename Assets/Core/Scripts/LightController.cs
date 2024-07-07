@@ -15,7 +15,8 @@ public class LightController : MonoBehaviour
 
     public Color32 totalLightColor;
     public float totalSens;
-
+    [Header("Global")]
+    public Color32 global_color;
 	void Start()
     {
 	}
@@ -24,6 +25,7 @@ public class LightController : MonoBehaviour
     {
 		RoomLightsColorChange(elements, totalLightColor);
 		RoomLightSensetivityChange(elements, totalSens);
+		RoomLightGlobalChange(global_color);
 	}
 
 	public void RoomLightsColorChange(List<LightElement> elements, Color32 color)
@@ -39,5 +41,9 @@ public class LightController : MonoBehaviour
 		{
 			element.light.intensity = sens;
 		}
+	}
+	public void RoomLightGlobalChange(Color32 color)
+	{
+        RenderSettings.ambientLight = color;
 	}
 }

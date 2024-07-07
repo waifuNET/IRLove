@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -27,10 +29,11 @@ public class WomanAI : MonoBehaviour
         {
             if (agent.remainingDistance < 0.01f)
             {
-                currentPoint = points[Random.Range(0, points.Count)].position;
+                //currentPoint = points[Random.Range(0, points.Count)].position;
 
 				agent.SetDestination(currentPoint.position);
             }
+            
         }
     }
 }

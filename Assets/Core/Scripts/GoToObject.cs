@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class GoToObject : MonoBehaviour
 {
+    public bool permament = false;
     public Transform target;
-    public float speed = 1;
+    public float followSpeed = 1;
     void Start()
     {
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position, speed * Time.deltaTime);
-
-	}
+        if (permament)
+        {
+            transform.position = target.position;
+            transform.rotation = target.rotation;
+        }
+        else
+        {
+            Vector3 desiredPosition = target.position;
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * followSpeed);
+            transform.position = smoothedPosition;
+        }
+    }
 }
