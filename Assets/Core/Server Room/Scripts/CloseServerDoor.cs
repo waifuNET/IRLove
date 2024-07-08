@@ -5,15 +5,22 @@ using UnityEngine;
 public class CloseServerDoor : MonoBehaviour, Iteraction
 {
     public Animator animator;
-    private bool active = true;
+    private bool isOpened = true;
+	private bool active = true;
 	public void Iterction()
 	{
-        if (active)
+        if (isOpened)
         {
-			SetActive(false);
 			animator.SetTrigger("CloseDoor");
+			isOpened = false;
 		}
-	}
+		else if (!isOpened)
+		{
+			animator.SetTrigger("OpenDoor");
+            isOpened = true;
+
+        }
+    }
 	public void SetActive(bool status)
 	{
 		active = status;
