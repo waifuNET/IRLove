@@ -12,19 +12,21 @@ public class CloseServerDoor : MonoBehaviour, Iteraction
 	{
         if (isOpened)
         {
-			animator.SetFloat("AnimSpeed", -1f);
-			animator.SetTrigger("DoorInt");
-			isOpened = false;
+			Action(-1f, false);
 
-		}
+        }
 		else if (!isOpened)
 		{
-			animator.SetFloat("AnimSpeed", 1f);
-			animator.SetTrigger("DoorInt");
-			isOpened = true;
-		}
+			Action(1f, true);
+        }
     }
-	public void SetActive(bool status)
+	public void Action(float f,bool b)
+	{
+		animator.SetFloat("AnimSpeed", f);
+        animator.SetTrigger("DoorInt");
+        isOpened = b;
+    }
+    public void SetActive(bool status)
 	{
 		active = status;
 		GetComponent<IRLButton_View>().active = status;
