@@ -426,6 +426,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spiral_02.5.1 Tentacle trail
       objectReference: {fileID: 0}
+    - target: {fileID: 1592711153756366, guid: 2a2762eb559a5e24cb94e81034b36a34, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4920297717707848, guid: 2a2762eb559a5e24cb94e81034b36a34, type: 3}
       propertyPath: m_LocalPosition.x
       value: -99.27223
