@@ -17,7 +17,8 @@ public class Сhair : MonoBehaviour, Iteraction
 
 	void Start()
 	{
-
+		playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonMovement>();
+		playerJump = GameObject.FindGameObjectWithTag("Player").GetComponent<Jump>();
 	}
 
 	void Update()

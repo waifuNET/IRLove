@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerIteract : MonoBehaviour
 {
+	public Transform PlayerCamera;
 	public Camera cam;
 
 	// See Order of Execution for Event Functions for information on FixedUpdate() and Update() related to physics queries
@@ -13,14 +14,14 @@ public class PlayerIteract : MonoBehaviour
 	{
 		RaycastHit hit;
 		// Does the ray intersect any objects excluding the player layer
-		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+		if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
 		{
-			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
+			Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
 			isVisible = true;
 		}
 		else
 		{
-			Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+			Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
 			isVisible = false;
 		}
 	}
