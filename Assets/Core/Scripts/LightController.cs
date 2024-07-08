@@ -17,16 +17,40 @@ public class LightController : MonoBehaviour
     public float totalSens;
     [Header("Global")]
     public Color32 global_color;
+
+    [Header("Day mode")]
+    public Color32 day_light;
+
+	public bool dayMode = true;
+    public List<GameObject> lights = new List<GameObject>();
 	void Start()
     {
+        if (dayMode)
+        {
+			RenderSettings.ambientLight = day_light;
+			foreach(GameObject go in lights)
+            {
+                go.SetActive(true);
+            }
+		}
+        else
+        {
+			foreach (GameObject go in lights)
+			{
+				go.SetActive(false);
+			}
+		}
 	}
 
     void FixedUpdate()
     {
-		RoomLightsColorChange(elements, totalLightColor);
-		RoomLightSensetivityChange(elements, totalSens);
-		RoomLightGlobalChange(global_color);
-	}
+        if (!dayMode)
+        {
+            RoomLightsColorChange(elements, totalLightColor);
+            RoomLightSensetivityChange(elements, totalSens);
+            RoomLightGlobalChange(global_color);
+        }
+    }
 
 	public void RoomLightsColorChange(List<LightElement> elements, Color32 color)
     {
