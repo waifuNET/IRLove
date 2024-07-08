@@ -20,18 +20,10 @@ public class IRLButton_View : MonoBehaviour
 
 	public void Select(bool select)
 	{
-		if (select && active)
+		if (active)
 		{
-			//outline.OutlineWidth = 10;
 			if(smothIE != null) StopCoroutine(smothIE);
-			smothIE = SmoothOutlineWidth(10);
-			StartCoroutine(smothIE);
-		}
-		else
-		{
-			//outline.OutlineWidth = 0;
-			if (smothIE != null) StopCoroutine(smothIE);
-			smothIE = SmoothOutlineWidth(0);
+			smothIE = SmoothOutlineWidth(select ? 10 : 0);
 			StartCoroutine(smothIE);
 		}
 	}
