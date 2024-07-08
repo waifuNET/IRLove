@@ -1,25 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class CloseServerDoor : MonoBehaviour, Iteraction
 {
     public Animator animator;
-    private bool isOpened = true;
+    public bool isOpened = false;
 	private bool active = true;
 	public void Iterction()
 	{
         if (isOpened)
         {
-			animator.SetTrigger("CloseDoor");
+			animator.SetFloat("AnimSpeed", -1f);
+			animator.SetTrigger("DoorInt");
 			isOpened = false;
+
 		}
 		else if (!isOpened)
 		{
-			animator.SetTrigger("OpenDoor");
-            isOpened = true;
-
-        }
+			animator.SetFloat("AnimSpeed", 1f);
+			animator.SetTrigger("DoorInt");
+			isOpened = true;
+		}
     }
 	public void SetActive(bool status)
 	{
