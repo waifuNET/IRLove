@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 5704780351613293994}
   - component: {fileID: 5520133403048135292}
   - component: {fileID: 6759920255861105981}
+  - component: {fileID: 6236016757207970292}
   m_Layer: 0
   m_Name: First Person Controller
   m_TagString: Player
@@ -419,6 +420,23 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &6236016757207970292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2188473442957132999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d604381c0d1a24a98e9dda82bf1a5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentItem:
+    Name: 
+    gameObject: {fileID: 0}
+  inventoryItemScrollPosition: 0
+  inventory: []
 --- !u!1 &2476130065286049605
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +695,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3439982548691339847}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 780f90e951d635f439326ea715cd97e9, type: 3}
   m_Name: 
@@ -1702,7 +1720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceThreshold: 0.15
-  isGrounded: 0
+  isGrounded: 1
 --- !u!1 &9179609040558046387
 GameObject:
   m_ObjectHideFlags: 0

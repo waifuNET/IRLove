@@ -14,6 +14,8 @@ public class GoToObject : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (target == null) return;
+
         if (permament)
         {
             transform.position = target.position;

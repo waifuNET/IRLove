@@ -14,6 +14,8 @@ public class SmoothViewTo : MonoBehaviour
 	}
 	void Update()
     {
+		if (target == null) return;
+
 		Vector3 direction = target.position - transform.position;
 		Quaternion targetRotation = Quaternion.LookRotation(direction);
 		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * smoothSpeed);
