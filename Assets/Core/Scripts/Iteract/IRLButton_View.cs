@@ -42,7 +42,7 @@ public class IRLButton_View : MonoBehaviour
 		float _now_value = outline.OutlineWidth;
 		while (outline.OutlineWidth != need)
 		{
-			if((_now_value + (smooth * 2)) > need || _now_value < 0)
+			if(outline.OutlineWidth > 10 || _now_value < 0)
 			{
 				outline.OutlineWidth = need;
 				break;
