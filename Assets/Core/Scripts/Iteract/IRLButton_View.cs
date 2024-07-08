@@ -37,7 +37,7 @@ public class IRLButton_View : MonoBehaviour
 	}
 	private IEnumerator SmoothOutlineWidth(float need)
 	{
-		float smooth_base = 0.1f;
+		float smooth_base = 0.5f;
 		float smooth = outline.OutlineWidth > need ? smooth_base * -1 : smooth_base;
 		float _now_value = outline.OutlineWidth;
 		while (outline.OutlineWidth != need)
