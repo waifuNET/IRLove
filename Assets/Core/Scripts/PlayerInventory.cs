@@ -20,7 +20,6 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         inventory.Add(new Items() { Name = "", gameObject = null });
-
     }
 
     void Update()
@@ -29,27 +28,30 @@ public class PlayerInventory : MonoBehaviour
         {
             inventoryItemScrollPosition += 1;
 			if (inventoryItemScrollPosition >= inventory.Count) inventoryItemScrollPosition = 0;
-			
-            ChangeItem(GetIteract(CurrentItem.gameObject));
-			CurrentItem = inventory[inventoryItemScrollPosition];
-			PickedItem(GetIteract(CurrentItem.gameObject));
 
+			ItemSwitch();
 		}
 		else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
 			inventoryItemScrollPosition -= 1;
 			if (inventoryItemScrollPosition < 0) inventoryItemScrollPosition = inventory.Count - 1;
-			
-            ChangeItem(GetIteract(CurrentItem.gameObject));
-			CurrentItem = inventory[inventoryItemScrollPosition];
-			PickedItem(GetIteract(CurrentItem.gameObject));
+
+			ItemSwitch();
 		}
+		
 
 		if (Input.GetKeyUp(KeyCode.F))
         {
             ItemIteract(GetIteract(CurrentItem.gameObject));
 		}
     }
+
+	private void ItemSwitch()
+	{
+		ChangeItem(GetIteract(CurrentItem.gameObject));
+		CurrentItem = inventory[inventoryItemScrollPosition];
+		PickedItem(GetIteract(CurrentItem.gameObject));
+	}
 
 	private ItemInterface GetIteract(GameObject go)
     {

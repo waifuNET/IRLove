@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2487433856242995851}
   - component: {fileID: 1382825542404452309}
   - component: {fileID: 1354278904391984420}
-  - component: {fileID: 7707715631782518795}
   - component: {fileID: 1185227637378258290}
   m_Layer: 0
   m_Name: Player Flashlight
@@ -152,22 +151,6 @@ MonoBehaviour:
   permament: 0
   target: {fileID: 0}
   followSpeed: 20
---- !u!114 &7707715631782518795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3239847166004834673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f0fde9f878f5294fbbf49347a25db47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canUse: 1
-  flashLight: {fileID: 8535947683218177335}
-  flashTexture: {fileID: 1224720814547490654}
-  maxIntensity: 1.5
 --- !u!114 &1185227637378258290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,8 +164,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 0
-  flashLightTexture: {fileID: 3239847166004834673}
-  root: {fileID: 1224720814547490654}
+  flashLightTexture: {fileID: 1224720814547490654}
+  root: {fileID: 3239847166004834673}
+  canUse: 1
+  flashLight: {fileID: 0}
+  maxIntensity: 1.5
 --- !u!1001 &1224720814547456510
 PrefabInstance:
   m_ObjectHideFlags: 0
