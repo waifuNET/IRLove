@@ -44,6 +44,7 @@ public class IRLButton_View : MonoBehaviour
 		{
 			if((_now_value + (smooth * 2)) > need || _now_value < 0)
 			{
+				outline.OutlineWidth = need;
 				break;
 			}
 			_now_value += smooth;
