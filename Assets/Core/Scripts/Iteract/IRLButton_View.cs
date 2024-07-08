@@ -49,7 +49,6 @@ public class IRLButton_View : MonoBehaviour
 			}
 			_now_value += smooth;
 			outline.OutlineWidth = _now_value;
-			Debug.Log("_now_value: " + _now_value);
 			yield return new WaitForSeconds(0.01f);
 		}
 	}
