@@ -759,7 +759,7 @@ PrefabInstance:
     - target: {fileID: 6816057096335803663, guid: 44b7241d8ab60024a9d7e78cfbd037f3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -90.425
+      value: -89.983
       objectReference: {fileID: 0}
     - target: {fileID: 6816057096335803663, guid: 44b7241d8ab60024a9d7e78cfbd037f3,
         type: 3}
@@ -811,7 +811,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7707715631782518795, guid: 44b7241d8ab60024a9d7e78cfbd037f3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1124,7 +1125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TakeGameobject: {fileID: 1447215666}
-  name: 
+  name: Flashlight
 --- !u!1001 &779875267777562948
 PrefabInstance:
   m_ObjectHideFlags: 0
