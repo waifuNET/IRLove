@@ -17,8 +17,11 @@ public class PlayerInventory : MonoBehaviour
 	public int inventoryItemScrollPosition = 0;
 
 	public Transform PlayerCamera;
+    public float timeButton;
 
     public LayerMask layerMask;
+    public Vector3 itemNewPos;
+    private int buttonCounter = 0;
 
     public KeyCode pressedButton;
     public List<Items> inventory = new List<Items>();
@@ -54,8 +57,24 @@ public class PlayerInventory : MonoBehaviour
 		
 		if(Input.GetKeyDown(KeyCode.G))
 		{
-			ItemDrop();
-		}
+            ItemPut();
+            //buttonCounter++;
+            //timeButton = Time.fixedDeltaTime;
+            //if(buttonCounter == 2)
+            //{
+            //    ItemPut();
+            //    //ItemDrop();
+            //    buttonCounter = 0;
+            //}
+            //else if(Input.GetKeyDown(KeyCode.E))
+            //{
+            //    ItemDrop();
+            //    //ItemPut();
+            //    buttonCounter = 0;
+            //}
+
+        }
+        Debug.Log(CurrentItem.Name);
     }
 
     void FixedUpdate()
@@ -65,15 +84,20 @@ public class PlayerInventory : MonoBehaviour
         if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
         {
             Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
+            itemNewPos = hit.point;
         }
         else
         {
             Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
         }
     }
-
+    
     private void ItemSwitch()
 	{
+        if(inventoryItemScrollPosition > inventory.Count-1 || inventoryItemScrollPosition < 0)
+        {
+            inventoryItemScrollPosition = 0;
+        }
 		ChangeItem(GetIteract(CurrentItem.gameObject));
 		CurrentItem = inventory[inventoryItemScrollPosition];
 		PickedItem(GetIteract(CurrentItem.gameObject));
@@ -112,6 +136,13 @@ public class PlayerInventory : MonoBehaviour
         rg.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
 		RemoveItem(CurrentItem);
     }
+    private void ItemPut()
+    {
+        GameObject origObj = CurrentItem.OriginalObject;
+        origObj.transform.position = itemNewPos;
+        origObj.SetActive(true);
+        RemoveItem(CurrentItem);
+    }
     private void ChangeItem(ItemInterface item)
     {
 		if (item == null) return;
@@ -125,7 +156,9 @@ public class PlayerInventory : MonoBehaviour
 	private void RemoveItem(Items item)
 	{
 		if (item == null) return;
-		GetIteract(item.gameObject).ChangeItem();
-		inventory.Remove(item);
-	}
+        GetIteract(item.gameObject).ChangeItem();
+        inventoryItemScrollPosition -= 1;
+        ItemSwitch();
+        inventory.Remove(item);
+    }
 }
