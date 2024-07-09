@@ -6,4 +6,5 @@ public interface Iteraction
 {
 	public void Iterction();
 	public void SetActive(bool status);
+
 }

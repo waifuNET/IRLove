@@ -7,4 +7,5 @@ public interface ItemInterface
 	public void Iterction();
 	public void ChangeItem();
 	public void PickedItem();
+	public bool GetStatus();
 }

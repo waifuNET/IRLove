@@ -35,4 +35,8 @@ public class FlashLightIteract : MonoBehaviour, ItemInterface
 	{
 		root.GetComponent<Light>().enabled = status;
 	}
+	public bool GetStatus()
+	{
+		return status;
+	}
 }

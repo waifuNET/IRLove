@@ -9,17 +9,24 @@ public class Items
 {
     public string Name;
     public GameObject gameObject;
+	public GameObject OriginalObject;
 }
 public class PlayerInventory : MonoBehaviour
 {
     public Items CurrentItem;
 	public int inventoryItemScrollPosition = 0;
 
+	public Transform PlayerCamera;
+
+    public LayerMask layerMask;
+
+    public KeyCode pressedButton;
     public List<Items> inventory = new List<Items>();
 
     void Start()
     {
         inventory.Add(new Items() { Name = "", gameObject = null });
+		PlayerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     void Update()
@@ -44,9 +51,28 @@ public class PlayerInventory : MonoBehaviour
         {
             ItemIteract(GetIteract(CurrentItem.gameObject));
 		}
+		
+		if(Input.GetKeyDown(KeyCode.G))
+		{
+			ItemDrop();
+		}
     }
 
-	private void ItemSwitch()
+    void FixedUpdate()
+    {
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
+        }
+        else
+        {
+            Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+        }
+    }
+
+    private void ItemSwitch()
 	{
 		ChangeItem(GetIteract(CurrentItem.gameObject));
 		CurrentItem = inventory[inventoryItemScrollPosition];
@@ -64,12 +90,28 @@ public class PlayerInventory : MonoBehaviour
 		}
         return null;
 	}
+	
     private void ItemIteract(ItemInterface item)
     {
         if (item == null) return;
         item.Iterction();
     } 
 
+	private void ItemDrop()
+	{
+        GameObject origObj = CurrentItem.OriginalObject;
+		if (origObj.GetComponent<Rigidbody>() == null)
+        {
+            Rigidbody rr = origObj.gameObject.AddComponent<Rigidbody>();
+			rr.mass = 1;
+			rr.angularDamping = 1.75f;
+        }
+        Rigidbody rg = origObj.GetComponent<Rigidbody>();
+        origObj.transform.position = PlayerCamera.transform.position;
+        origObj.SetActive(true);
+        rg.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
+		RemoveItem(CurrentItem);
+    }
     private void ChangeItem(ItemInterface item)
     {
 		if (item == null) return;
@@ -79,5 +121,11 @@ public class PlayerInventory : MonoBehaviour
 	{
 		if (item == null) return;
 		item.PickedItem();
+	}
+	private void RemoveItem(Items item)
+	{
+		if (item == null) return;
+		GetIteract(item.gameObject).ChangeItem();
+		inventory.Remove(item);
 	}
 }
