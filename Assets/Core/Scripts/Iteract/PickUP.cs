@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PickUP : MonoBehaviour, Iteraction
 {
 	private PlayerInventory inventory;
@@ -15,7 +16,9 @@ public class PickUP : MonoBehaviour, Iteraction
 	{
 		gameObject.SetActive(false);
 		inventory.inventory.Add(new Items() { Name = name, gameObject = TakeGameobject, OriginalObject = gameObject});
-	}
+        inventory.inventoryItemScrollPosition = inventory.inventory.Count - 1;
+		inventory.ItemSwitch();
+    }
 
 	public void SetActive(bool status)
 	{

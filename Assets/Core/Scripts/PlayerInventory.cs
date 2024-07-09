@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ public class PlayerInventory : MonoBehaviour
     public LayerMask layerMask;
     public Vector3 itemNewPos;
     private int buttonCounter = 0;
+    Vector3 tempPos;
 
     public KeyCode pressedButton;
     public List<Items> inventory = new List<Items>();
@@ -74,7 +76,6 @@ public class PlayerInventory : MonoBehaviour
             //}
 
         }
-        Debug.Log(CurrentItem.Name);
     }
 
     void FixedUpdate()
@@ -84,15 +85,41 @@ public class PlayerInventory : MonoBehaviour
         if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
         {
             Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
-            itemNewPos = hit.point;
+            tempPos = hit.point;
         }
         else
         {
             Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
         }
     }
-    
-    private void ItemSwitch()
+    private void SetItemNewPos(Vector3 h)
+    {
+        if(CurrentItem.OriginalObject.GetComponent<BoxCollider>() != null)
+        {
+            itemNewPos = new Vector3(
+            h.x,
+            h.y+ CurrentItem.OriginalObject.GetComponent<BoxCollider>().size.y/2f,
+            h.z
+            );
+        }
+        else if(CurrentItem.OriginalObject.GetComponent<CapsuleCollider>() != null ) 
+        {
+            itemNewPos = new Vector3(
+            h.x,
+            h.y + CurrentItem.OriginalObject.GetComponent<CapsuleCollider>().radius/2f,
+            h.z
+            );
+        }
+        else if (CurrentItem.OriginalObject.GetComponent<SphereCollider>() != null)
+        {
+            itemNewPos = new Vector3(
+            h.x,
+            h.y + CurrentItem.OriginalObject.GetComponent<SphereCollider>().radius /2f,
+            h.z
+            );
+        }
+    }
+    public void ItemSwitch()
 	{
         if(inventoryItemScrollPosition > inventory.Count-1 || inventoryItemScrollPosition < 0)
         {
@@ -138,6 +165,7 @@ public class PlayerInventory : MonoBehaviour
     }
     private void ItemPut()
     {
+        SetItemNewPos(tempPos);
         GameObject origObj = CurrentItem.OriginalObject;
         origObj.transform.position = itemNewPos;
         origObj.SetActive(true);
