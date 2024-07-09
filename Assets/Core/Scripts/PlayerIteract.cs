@@ -26,28 +26,48 @@ public class PlayerIteract : MonoBehaviour
 		}
 	}
 	public GameObject IterctObj;
-	
+
+	private float closestDistance = float.MaxValue;
+	private List<GameObject> interactableObjects = new List<GameObject>();
+
 	private void OnTriggerStay(Collider other)
 	{
-		if(other.gameObject.tag == "Iteract" && isVisible)
+		if (other.gameObject.tag == "Iteract" && isVisible)
 		{
-			if (other.TryGetComponent(out IRLButton_View view))
+			if (!interactableObjects.Contains(other.gameObject))
 			{
-				view.Select(true);
+				interactableObjects.Add(other.gameObject);
+			}
+
+			float distance = Vector3.Distance(transform.position, other.transform.position);
+
+			if (distance < closestDistance)
+			{
+				if (IterctObj != null)
+				{
+					IterctObj.GetComponent<IRLButton_View>().Select(false); // Отключаем подсветку предыдущего объекта
+				}
+
+				closestDistance = distance;
 				IterctObj = other.gameObject;
+				IterctObj.GetComponent<IRLButton_View>().Select(true); // Включаем подсветку нового объекта
 			}
 		}
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.tag == "Iteract")
+		if (other.gameObject == IterctObj)
 		{
-			if (other.TryGetComponent(out IRLButton_View view))
-			{
-				view.Select(false);
-				IterctObj = null;
-			}
+			IterctObj.GetComponent<IRLButton_View>().Select(false);
+			IterctObj = null;
+			closestDistance = float.MaxValue;
+		}
+
+		if (interactableObjects.Contains(other.gameObject))
+		{
+			other.GetComponent<IRLButton_View>().Select(false);
+			interactableObjects.Remove(other.gameObject);
 		}
 	}
 
