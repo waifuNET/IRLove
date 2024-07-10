@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Burst.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -16,17 +17,25 @@ public class Items
 public class PlayerInventory : MonoBehaviour
 {
     public Items CurrentItem;
-	public int inventoryItemScrollPosition = 0;
+    public int inventoryItemScrollPosition = 0;
 
-	public Transform PlayerCamera;
+    public Transform PlayerCamera;
     public bool heldButton = false;
 
     public LayerMask layerMask;
     public Vector3 itemNewPos;
-    private int buttonCounter = 0;
+    private float timeButton;
+    private bool timeButtonStart = false;
+    private bool itemDropped = false;
     Vector3 tempPos;
     public float putDistance;
     public float maxDistance = 1.8f;
+
+    Renderer[] renderers;
+    public Material blueGhostMaterial;
+    public Material redGhostMaterial;
+    private bool blueAdd;
+    private bool redAdd;
 
     public KeyCode pressedButton;
     public List<Items> inventory = new List<Items>();
@@ -34,7 +43,7 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         inventory.Add(new Items() { Name = "", gameObject = null });
-		PlayerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        PlayerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     void Update()
@@ -42,46 +51,83 @@ public class PlayerInventory : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
             inventoryItemScrollPosition += 1;
-			if (inventoryItemScrollPosition >= inventory.Count) inventoryItemScrollPosition = 0;
+            if (inventoryItemScrollPosition >= inventory.Count) inventoryItemScrollPosition = 0;
 
-			ItemSwitch();
-		}
-		else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+            ItemSwitch();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
-			inventoryItemScrollPosition -= 1;
-			if (inventoryItemScrollPosition < 0) inventoryItemScrollPosition = inventory.Count - 1;
+            inventoryItemScrollPosition -= 1;
+            if (inventoryItemScrollPosition < 0) inventoryItemScrollPosition = inventory.Count - 1;
 
-			ItemSwitch();
-		}
-		
+            ItemSwitch();
+        }
 
-		if (Input.GetKeyUp(KeyCode.F))
+
+        if (Input.GetKeyUp(KeyCode.F))
         {
             ItemIteract(GetIteract(CurrentItem.gameObject));
-		}
+        }
+
+        if (timeButtonStart)
+        {
+            timeButton += Time.fixedDeltaTime;
+        }
 
         if (CurrentItem.gameObject == null) return;
         else
         {
             if (Input.GetKeyDown(KeyCode.G))
-            {                
+            {
+                timeButtonStart = true;
                 heldButton = true;
             }
             else if (Input.GetKeyUp(KeyCode.G))
             {
-
-                if (putDistance < maxDistance)
+                
+                timeButtonStart = false;
+                if (timeButton < 2f)
                 {
-                    RemoveItem(CurrentItem);
+                    itemDropped = true;
+                    ItemDrop();
+                    timeButton = 0;
+                } else
+                {
+                    
+                    if (putDistance < maxDistance)
+                    {
+                        if (!itemDropped)
+                        {
+                            Rigidbody rg = CurrentItem.OriginalObject.GetComponent<Rigidbody>();
+                            rg.linearVelocity = Vector3.zero;
+                            rg.angularDamping = 50;
+                        }
+                        RemoveGhostEffets(blueGhostMaterial);
+                        RemoveItem(CurrentItem);
+                    }
+                    else { Debug.Log("Too far"); CurrentItem.OriginalObject.SetActive(false); RemoveGhostEffets(redGhostMaterial); }
+                    timeButton = 0;
                 }
-                else { Debug.Log("Too far"); CurrentItem.OriginalObject.SetActive(false); }
+                itemDropped = false;
                 heldButton = false;
             }
         }
+        
 
-        if (heldButton)
+        if (heldButton && timeButton>1f)
 		{
-            ItemPut();
+            if(putDistance < maxDistance)
+            {
+                if (redAdd) { RemoveGhostEffets(redGhostMaterial); }
+                PutGhostEffect();
+                ItemPut();
+            }
+            else
+            {
+                if (blueAdd) { RemoveGhostEffets(blueGhostMaterial); }
+                PutGhostEffectOutOfRange();
+                ItemPut();
+            }
         }
     }
 
@@ -100,6 +146,54 @@ public class PlayerInventory : MonoBehaviour
             Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
         }
     }
+    private void PutGhostEffect()
+    {
+        if (blueAdd) { return; } 
+        renderers = CurrentItem.OriginalObject.GetComponentsInChildren<Renderer>();
+        foreach (var renderer in renderers)
+        {
+            var materials = renderer.sharedMaterials.ToList();
+
+            materials.Add(blueGhostMaterial);
+            blueAdd = true;
+            Debug.Log("Add blue");
+
+            renderer.materials = materials.ToArray();
+        }
+        blueAdd = true;
+
+    }
+    private void PutGhostEffectOutOfRange()
+    {
+        if (redAdd) { return; }
+        renderers = CurrentItem.OriginalObject.GetComponentsInChildren<Renderer>();
+        foreach (var renderer in renderers)
+        {
+            var materials = renderer.sharedMaterials.ToList();
+
+            materials.Add(redGhostMaterial);
+            redAdd = true;
+            Debug.Log("Add red");
+
+            renderer.materials = materials.ToArray();
+        }
+        redAdd = true;
+    }
+
+    private void RemoveGhostEffets(Material m)
+    {
+        foreach (var renderer in renderers)
+        {
+            var materials = renderer.sharedMaterials.ToList();
+
+            materials.Remove(m);
+            if(m == blueGhostMaterial) { blueAdd = false; }
+            if(m == redGhostMaterial) {  redAdd = false; }
+
+            renderer.materials = materials.ToArray();
+        }
+    }
+    
     private void SetItemNewPos(Vector3 h)
     {
         if(CurrentItem.OriginalObject.GetComponent<BoxCollider>() != null)
@@ -158,31 +252,26 @@ public class PlayerInventory : MonoBehaviour
 
 	private void ItemDrop()
 	{
-        if (CurrentItem.gameObject == null) return;
-        else
+        GameObject origObj = CurrentItem.OriginalObject;
+        if (origObj.GetComponent<Rigidbody>() == null)
         {
-            GameObject origObj = CurrentItem.OriginalObject;
-            if (origObj.GetComponent<Rigidbody>() == null)
-            {
-                Rigidbody rr = origObj.gameObject.AddComponent<Rigidbody>();
-                rr.mass = 1;
-                rr.angularDamping = 1.75f;
-            }
-            Rigidbody rg = origObj.GetComponent<Rigidbody>();
-            origObj.transform.position = PlayerCamera.transform.position;
-            origObj.SetActive(true);
-            rg.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
-            RemoveItem(CurrentItem);
+            Rigidbody rr = origObj.gameObject.AddComponent<Rigidbody>();
+            rr.mass = 1;
+            rr.angularDamping = 1.75f;
         }
+        Rigidbody rg = origObj.GetComponent<Rigidbody>();
+        rg.mass = 1;
+        rg.angularDamping = 1.75f;
+        origObj.transform.position = PlayerCamera.transform.position;
+        origObj.SetActive(true);
+        rg.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
+        RemoveItem(CurrentItem);
     }
     private void ItemPut()
     {
         SetItemNewPos(tempPos);
         GameObject origObj = CurrentItem.OriginalObject;
         origObj.transform.position = itemNewPos;
-        Rigidbody rg = origObj.GetComponent<Rigidbody>();
-        rg.linearVelocity = Vector3.zero;
-        rg.angularDamping = 50;
         origObj.SetActive(true);
     }
     private void ChangeItem(ItemInterface item)
