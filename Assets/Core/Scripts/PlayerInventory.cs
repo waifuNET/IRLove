@@ -25,6 +25,8 @@ public class PlayerInventory : MonoBehaviour
     public Vector3 itemNewPos;
     private int buttonCounter = 0;
     Vector3 tempPos;
+    public float putDistance;
+    public float maxDistance = 1.8f;
 
     public KeyCode pressedButton;
     public List<Items> inventory = new List<Items>();
@@ -57,16 +59,24 @@ public class PlayerInventory : MonoBehaviour
         {
             ItemIteract(GetIteract(CurrentItem.gameObject));
 		}
-		
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            heldButton = true;
-        }
-        else if(Input.GetKeyUp(KeyCode.G))
-        {
-            heldButton = false;
-            RemoveItem(CurrentItem);
 
+        if (CurrentItem.gameObject == null) return;
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.G))
+            {                
+                heldButton = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.G))
+            {
+
+                if (putDistance < maxDistance)
+                {
+                    RemoveItem(CurrentItem);
+                }
+                else { Debug.Log("Too far"); CurrentItem.OriginalObject.SetActive(false); }
+                heldButton = false;
+            }
         }
 
         if (heldButton)
@@ -83,6 +93,7 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
             tempPos = hit.point;
+            putDistance = hit.distance;
         }
         else
         {
@@ -147,18 +158,22 @@ public class PlayerInventory : MonoBehaviour
 
 	private void ItemDrop()
 	{
-        GameObject origObj = CurrentItem.OriginalObject;
-		if (origObj.GetComponent<Rigidbody>() == null)
+        if (CurrentItem.gameObject == null) return;
+        else
         {
-            Rigidbody rr = origObj.gameObject.AddComponent<Rigidbody>();
-			rr.mass = 1;
-			rr.angularDamping = 1.75f;
+            GameObject origObj = CurrentItem.OriginalObject;
+            if (origObj.GetComponent<Rigidbody>() == null)
+            {
+                Rigidbody rr = origObj.gameObject.AddComponent<Rigidbody>();
+                rr.mass = 1;
+                rr.angularDamping = 1.75f;
+            }
+            Rigidbody rg = origObj.GetComponent<Rigidbody>();
+            origObj.transform.position = PlayerCamera.transform.position;
+            origObj.SetActive(true);
+            rg.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
+            RemoveItem(CurrentItem);
         }
-        Rigidbody rg = origObj.GetComponent<Rigidbody>();
-        origObj.transform.position = PlayerCamera.transform.position;
-        origObj.SetActive(true);
-        rg.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
-		RemoveItem(CurrentItem);
     }
     private void ItemPut()
     {
