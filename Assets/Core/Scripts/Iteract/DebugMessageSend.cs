@@ -11,7 +11,7 @@ public class DebugMessageSend : MonoBehaviour, Iteraction
 	}
 	public void Iterction()
 	{
-		sendMessage.SendPlayerMessage("VZLOM ASS", Color.white);
+		sendMessage.SendPlayerMessage("SCP —Œ—¿¿¿¿¿¿¿¿¿¿¿“‹", Color.white);
 	}
 
 	public void SetActive(bool status)

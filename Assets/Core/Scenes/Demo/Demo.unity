@@ -843,7 +843,6 @@ GameObject:
   - component: {fileID: 873326842}
   - component: {fileID: 873326846}
   - component: {fileID: 873326847}
-  - component: {fileID: 873326848}
   m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Iteract
@@ -965,19 +964,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshProUGUI: {fileID: 0}
---- !u!114 &873326848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 873326841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9f50a1cc83926b4088f3d9fae39ede5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 1
 --- !u!1001 &950815028
 PrefabInstance:
   m_ObjectHideFlags: 0
