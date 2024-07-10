@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 5664222553003716882}
   - component: {fileID: 2951228639971179773}
   - component: {fileID: 4944093645479975193}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PlayerMessages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.263, y: 0.002, z: -0.54}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2682658466949449342}
@@ -573,14 +573,16 @@ MonoBehaviour:
     gameObject: {fileID: 0}
     OriginalObject: {fileID: 0}
   inventoryItemScrollPosition: 0
-  PlayerCamera: {fileID: 0}
+  PlayerCamera: {fileID: 2682658466949449342}
   heldButton: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 503
   itemNewPos: {x: 0, y: 0, z: 0}
   putDistance: 0
   maxDistance: 1.8
+  blueGhostMaterial: {fileID: 2100000, guid: 14e7f34d2c6f56e47a2c2db725205f6d, type: 2}
+  redGhostMaterial: {fileID: 2100000, guid: 4d36eef913c176e4c85a58fd849c629e, type: 2}
   pressedButton: 0
   inventory: []
 --- !u!1 &2476130065286049605
@@ -727,7 +729,7 @@ GameObject:
   - component: {fileID: 4478082008033850349}
   - component: {fileID: 1596502205777662317}
   - component: {fileID: 4471643791230080993}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: First Person Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -906,7 +908,7 @@ GameObject:
   - component: {fileID: 6822487944907860488}
   - component: {fileID: 1213841582615969697}
   - component: {fileID: 6137011491487659432}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FlashLightPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -922,7 +924,7 @@ Transform:
   m_GameObject: {fileID: 3676462782740389464}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.55999994, y: -0.10599983, z: 0.32}
+  m_LocalPosition: {x: 0.18, y: -0.107, z: 0.128}
   m_LocalScale: {x: 0.16, y: 0.053333335, z: 0.16}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1027,7 +1029,7 @@ GameObject:
   - component: {fileID: 1362688057733968084}
   - component: {fileID: 6801114624631613901}
   - component: {fileID: 5061775870167397014}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1064,7 +1066,7 @@ Canvas:
   m_GameObject: {fileID: 4396891830071535182}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 6152114917178790770}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1260,7 +1262,7 @@ GameObject:
   - component: {fileID: 741820673224249302}
   - component: {fileID: 6053188188955695639}
   - component: {fileID: 6926080477828001429}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: IteractionZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1276,8 +1278,8 @@ Transform:
   m_GameObject: {fileID: 5387202612554706293}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 2.0398}
-  m_LocalScale: {x: 0.10000001, y: 0.039236, z: 4.2097983}
+  m_LocalPosition: {x: -0, y: 0, z: 0.787}
+  m_LocalScale: {x: 0.10000001, y: 0.039236, z: 1.7037915}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2682658466949449342}
@@ -1389,7 +1391,7 @@ GameObject:
   - component: {fileID: 4178669484579687094}
   - component: {fileID: 5943094393344022068}
   - component: {fileID: 3505010918289086148}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2048,7 +2050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceThreshold: 0.15
-  isGrounded: 1
+  isGrounded: 0
 --- !u!1 &9179609040558046387
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,7 +2062,7 @@ GameObject:
   - component: {fileID: 7678693725977504333}
   - component: {fileID: 8681103022975048236}
   - component: {fileID: 2134281343629018862}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FlashPoint
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -2076,7 +2078,7 @@ Transform:
   m_GameObject: {fileID: 9179609040558046387}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.00027724405, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0009999275, y: 0, z: 4.1385}
+  m_LocalPosition: {x: 0, y: 0, z: 1.658}
   m_LocalScale: {x: 0.15999998, y: 0.054857146, z: 0.16000003}
   m_ConstrainProportionsScale: 1
   m_Children: []

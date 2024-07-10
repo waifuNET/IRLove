@@ -51,7 +51,6 @@ public class Сhair : MonoBehaviour, Iteraction
 		playerJump.canJump = !status;
 		playerMovement.gameObject.GetComponent<Crouch>().canCrouch = !status;
 		playerMovement.gameObject.GetComponent<Rigidbody>().isKinematic = status;
-		SetActive(!status);
 		Sit(status);
 
 	}
@@ -64,10 +63,5 @@ public class Сhair : MonoBehaviour, Iteraction
 
 			PlayerSitStatus(true);
 		}
-	}
-
-	public void SetActive(bool status)
-	{
-		GetComponent<IRLButton_View>().active = status;
 	}
 }

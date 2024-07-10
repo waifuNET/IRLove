@@ -167,7 +167,7 @@ MonoBehaviour:
   flashLightTexture: {fileID: 1224720814547490654}
   root: {fileID: 3239847166004834673}
   canUse: 1
-  flashLight: {fileID: 0}
+  flashLight: {fileID: 8535947683218177335}
   maxIntensity: 1.5
 --- !u!1001 &1224720814547456510
 PrefabInstance:

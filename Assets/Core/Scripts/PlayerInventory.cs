@@ -37,7 +37,6 @@ public class PlayerInventory : MonoBehaviour
     private bool blueAdd;
     private bool redAdd;
 
-    public KeyCode pressedButton;
     public List<Items> inventory = new List<Items>();
 
     void Start()

@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 3886397345042095169}
   - component: {fileID: 930813686730865836}
   - component: {fileID: 181513750551603854}
-  - component: {fileID: 295998967383628301}
-  - component: {fileID: 4361303421062874398}
   - component: {fileID: 7687268864726031847}
   - component: {fileID: 4166350575717135639}
+  - component: {fileID: 7136890923724365351}
   m_Layer: 3
   m_Name: Flashlight_PICKUP
   m_TagString: Iteract
@@ -93,38 +92,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &295998967383628301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4833220538756667114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 1
-  outlineColor: {r: 0, g: 0.51251936, b: 1, a: 1}
-  outlineWidth: 0
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &4361303421062874398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4833220538756667114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9f50a1cc83926b4088f3d9fae39ede5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outline: {fileID: 0}
-  active: 1
 --- !u!136 &7687268864726031847
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -162,3 +129,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TakeGameobject: {fileID: 0}
   name: Flashlight
+--- !u!54 &7136890923724365351
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4833220538756667114}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 1.75
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2

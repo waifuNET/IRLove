@@ -10,18 +10,12 @@ public class OpenExitDoor : MonoBehaviour, Iteraction
 	public void Iterction()
 	{
 		door.SetActive(true);
-		SetActive(false);
 		StartCoroutine("ChangeColor");
 	}
 
 	private void Start()
 	{
 		material.SetColor("_EmissionColor", new Color(255, 255, 255) * Mathf.Pow(2, -20));
-	}
-
-	public void SetActive(bool status)
-	{
-		GetComponent<IRLButton_View>().active = status;
 	}
 
 	public IEnumerator ChangeColor()

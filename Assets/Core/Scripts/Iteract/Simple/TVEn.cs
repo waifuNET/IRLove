@@ -25,9 +25,4 @@ public class TVEn : MonoBehaviour, Iteraction
 		}
 		enable = !enable;
 	}
-
-	public void SetActive(bool status)
-	{
-		GetComponent<IRLButton_View>().active = status;
-	}
 }

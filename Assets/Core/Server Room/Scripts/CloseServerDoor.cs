@@ -26,9 +26,4 @@ public class CloseServerDoor : MonoBehaviour, Iteraction
         animator.SetTrigger("DoorInt");
         isOpened = b;
     }
-    public void SetActive(bool status)
-	{
-		active = status;
-		GetComponent<IRLButton_View>().active = status;
-	}
 }
