@@ -180,6 +180,9 @@ public class PlayerInventory : MonoBehaviour
         SetItemNewPos(tempPos);
         GameObject origObj = CurrentItem.OriginalObject;
         origObj.transform.position = itemNewPos;
+        Rigidbody rg = origObj.GetComponent<Rigidbody>();
+        rg.linearVelocity = Vector3.zero;
+        rg.angularDamping = 50;
         origObj.SetActive(true);
     }
     private void ChangeItem(ItemInterface item)
