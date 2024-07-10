@@ -59,21 +59,21 @@ public class PlayerIteract : MonoBehaviour
 	{
 		if (other.gameObject == IterctObj)
 		{
-			PlayerCrosshair.sprite = defaultCrosshair;
 			IterctObj = null;
 			closestDistance = float.MaxValue;
 		}
 
 		if (interactableObjects.Contains(other.gameObject))
 		{
-			PlayerCrosshair.sprite = defaultCrosshair;
 			interactableObjects.Remove(other.gameObject);
 		}
 	}
 
 	public void Update()
 	{
-		if(isVisible && IterctObj && Input.GetKeyDown(KeyCode.E))
+		if(!isVisible) PlayerCrosshair.sprite = defaultCrosshair;
+
+		if (isVisible && IterctObj && Input.GetKeyDown(KeyCode.E))
 		{
 			IterctObj.GetComponent<Iteraction>().Iterction();
 		}
