@@ -5,6 +5,7 @@ using Unity.Burst.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+
 [System.Serializable]
 public class Items
 {
@@ -18,7 +19,7 @@ public class PlayerInventory : MonoBehaviour
 	public int inventoryItemScrollPosition = 0;
 
 	public Transform PlayerCamera;
-    public float timeButton;
+    public bool heldButton = false;
 
     public LayerMask layerMask;
     public Vector3 itemNewPos;
@@ -57,24 +58,20 @@ public class PlayerInventory : MonoBehaviour
             ItemIteract(GetIteract(CurrentItem.gameObject));
 		}
 		
-		if(Input.GetKeyDown(KeyCode.G))
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            heldButton = true;
+        }
+        else if(Input.GetKeyUp(KeyCode.G))
+        {
+            heldButton = false;
+            RemoveItem(CurrentItem);
+
+        }
+
+        if (heldButton)
 		{
             ItemPut();
-            //buttonCounter++;
-            //timeButton = Time.fixedDeltaTime;
-            //if(buttonCounter == 2)
-            //{
-            //    ItemPut();
-            //    //ItemDrop();
-            //    buttonCounter = 0;
-            //}
-            //else if(Input.GetKeyDown(KeyCode.E))
-            //{
-            //    ItemDrop();
-            //    //ItemPut();
-            //    buttonCounter = 0;
-            //}
-
         }
     }
 
@@ -169,7 +166,6 @@ public class PlayerInventory : MonoBehaviour
         GameObject origObj = CurrentItem.OriginalObject;
         origObj.transform.position = itemNewPos;
         origObj.SetActive(true);
-        RemoveItem(CurrentItem);
     }
     private void ChangeItem(ItemInterface item)
     {
