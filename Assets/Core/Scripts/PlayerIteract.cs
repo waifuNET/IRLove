@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerIteract : MonoBehaviour
 {
 	public Transform PlayerCamera;
+	public Image PlayerCrosshair;
+	public Sprite defaultCrosshair;
+	public Sprite iteractCrosshair;
 	public Camera cam;
 
 	// See Order of Execution for Event Functions for information on FixedUpdate() and Update() related to physics queries
 	public LayerMask layerMask;
 	public bool isVisible = false;
+
 	void FixedUpdate()
 	{
 		RaycastHit hit;
@@ -43,14 +48,9 @@ public class PlayerIteract : MonoBehaviour
 
 			if (distance < closestDistance)
 			{
-				if (IterctObj != null)
-				{
-					IterctObj.GetComponent<IRLButton_View>().Select(false); // Отключаем подсветку предыдущего объекта
-				}
-
 				closestDistance = distance;
 				IterctObj = other.gameObject;
-				IterctObj.GetComponent<IRLButton_View>().Select(true); // Включаем подсветку нового объекта
+				PlayerCrosshair.sprite = iteractCrosshair;
 			}
 		}
 	}
@@ -59,14 +59,14 @@ public class PlayerIteract : MonoBehaviour
 	{
 		if (other.gameObject == IterctObj)
 		{
-			IterctObj.GetComponent<IRLButton_View>().Select(false);
+			PlayerCrosshair.sprite = defaultCrosshair;
 			IterctObj = null;
 			closestDistance = float.MaxValue;
 		}
 
 		if (interactableObjects.Contains(other.gameObject))
 		{
-			other.GetComponent<IRLButton_View>().Select(false);
+			PlayerCrosshair.sprite = defaultCrosshair;
 			interactableObjects.Remove(other.gameObject);
 		}
 	}
