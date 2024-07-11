@@ -244,9 +244,10 @@ public class PlayerInventory : MonoBehaviour
         {
             itemNewPos = new Vector3(
             h.x,
-            h.y+ CurrentItem.OriginalObject.GetComponent<BoxCollider>().size.y/2f,
-            h.z
-            );
+            h.y,
+            h.z + CurrentItem.OriginalObject.GetComponent<BoxCollider>().size.z / 2f
+
+			);
         }
         else if(CurrentItem.OriginalObject.GetComponent<CapsuleCollider>() != null ) 
         {
