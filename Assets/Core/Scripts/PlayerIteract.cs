@@ -11,69 +11,39 @@ public class PlayerIteract : MonoBehaviour
 	public Sprite iteractCrosshair;
 	public Camera cam;
 
-	// See Order of Execution for Event Functions for information on FixedUpdate() and Update() related to physics queries
 	public LayerMask layerMask;
-	public bool isVisible = false;
 
-	void FixedUpdate()
+	public GameObject IterctObj;
+
+	private float closestDistance = 1.5f;
+
+	public void Update()
 	{
 		RaycastHit hit;
-		// Does the ray intersect any objects excluding the player layer
-		if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+		if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward), out hit, closestDistance, layerMask))
 		{
 			Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
-			isVisible = true;
+			if (hit.transform.gameObject.tag == "Iteract")
+			{
+				float distance = Vector3.Distance(transform.position, hit.transform.transform.position);
+
+				if (distance < closestDistance)
+				{
+					IterctObj = hit.transform.gameObject;
+					PlayerCrosshair.sprite = iteractCrosshair;
+				}
+			}
 		}
 		else
 		{
 			Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-			isVisible = false;
-		}
-	}
-	public GameObject IterctObj;
+			PlayerCrosshair.sprite = defaultCrosshair;
 
-	private float closestDistance = float.MaxValue;
-	private List<GameObject> interactableObjects = new List<GameObject>();
-
-	private void OnTriggerStay(Collider other)
-	{
-		if (other.gameObject.tag == "Iteract" && isVisible)
-		{
-			if (!interactableObjects.Contains(other.gameObject))
-			{
-				interactableObjects.Add(other.gameObject);
-			}
-
-			float distance = Vector3.Distance(transform.position, other.transform.position);
-
-			if (distance < closestDistance)
-			{
-				closestDistance = distance;
-				IterctObj = other.gameObject;
-				PlayerCrosshair.sprite = iteractCrosshair;
-			}
-		}
-	}
-
-	private void OnTriggerExit(Collider other)
-	{
-		if (other.gameObject == IterctObj)
-		{
 			IterctObj = null;
-			closestDistance = float.MaxValue;
 		}
 
-		if (interactableObjects.Contains(other.gameObject))
-		{
-			interactableObjects.Remove(other.gameObject);
-		}
-	}
 
-	public void Update()
-	{
-		if(!isVisible) PlayerCrosshair.sprite = defaultCrosshair;
-
-		if (isVisible && IterctObj && Input.GetKeyDown(KeyCode.E))
+		if (IterctObj && Input.GetKeyDown(KeyCode.E))
 		{
 			IterctObj.GetComponent<Iteraction>().Iterction();
 		}

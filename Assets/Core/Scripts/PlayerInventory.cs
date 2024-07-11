@@ -20,14 +20,14 @@ public class PlayerInventory : MonoBehaviour
     public int inventoryItemScrollPosition = 0;
 
     public Transform PlayerCamera;
-    public bool heldButton = false;
+    [HideInInspector] public bool heldButton = false;
 
     public LayerMask layerMask;
     public Vector3 itemNewPos;
     private float timeButton;
-    public float heldTime;
-    private bool timeButtonStart = false;
-    private bool itemDropped = false;
+	private float heldTime = 0.250f;
+	[HideInInspector] public bool timeButtonStart = false;
+    [HideInInspector] public bool itemDropped = false;
     Vector3 tempPos;
     public float putDistance;
     public float maxDistance = 1.8f;
@@ -101,7 +101,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (timeButtonStart)
         {
-            timeButton += Time.fixedDeltaTime;
+            timeButton += Time.deltaTime;
         }
 
         if (CurrentItem.gameObject == null) return;
@@ -123,7 +123,6 @@ public class PlayerInventory : MonoBehaviour
     private void ItemRayCast()
     {
         RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
         {
             Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * hit.distance, Color.blue);
