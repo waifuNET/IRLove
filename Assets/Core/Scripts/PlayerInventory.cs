@@ -31,6 +31,8 @@ public class PlayerInventory : MonoBehaviour
     public float putDistance;
     public float maxDistance = 1.8f;
 
+    public float rotationIndex = 30f;
+
     Renderer[] renderers;
     public Material blueGhostMaterial;
     public Material redGhostMaterial;
@@ -47,6 +49,25 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
+        if(!timeButtonStart)
+        {
+            ItemScroll();
+        }
+        else
+        {
+            ItemRotate();
+        }
+        
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            ItemIteract(GetIteract(CurrentItem.gameObject));
+        }
+
+        DropAndPutButton();
+    }
+
+    private void ItemScroll()
+    {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
             inventoryItemScrollPosition += 1;
@@ -61,13 +82,21 @@ public class PlayerInventory : MonoBehaviour
 
             ItemSwitch();
         }
+    }
 
-
-        if (Input.GetKeyUp(KeyCode.F))
+    private void ItemRotate()
+    {
+        Transform origObjTrans = CurrentItem.OriginalObject.transform;
+        float origObjRotZ = origObjTrans.rotation.z;
+        if (Input.mouseScrollDelta.y != 0)
         {
-            ItemIteract(GetIteract(CurrentItem.gameObject));
+            origObjTrans.Rotate(Vector3.right * Input.mouseScrollDelta.y*rotationIndex);
         }
 
+
+    }
+    private void DropAndPutButton()
+    {
         if (timeButtonStart)
         {
             timeButton += Time.fixedDeltaTime;
@@ -83,54 +112,13 @@ public class PlayerInventory : MonoBehaviour
             }
             else if (Input.GetKeyUp(KeyCode.G))
             {
-                
-                timeButtonStart = false;
-                if (timeButton < 2f)
-                {
-                    itemDropped = true;
-                    ItemDrop();
-                    timeButton = 0;
-                } else
-                {
-                    
-                    if (putDistance < maxDistance)
-                    {
-                        if (!itemDropped)
-                        {
-                            Rigidbody rg = CurrentItem.OriginalObject.GetComponent<Rigidbody>();
-                            rg.linearVelocity = Vector3.zero;
-                            rg.angularDamping = 50;
-                        }
-                        RemoveGhostEffets(blueGhostMaterial);
-                        RemoveItem(CurrentItem);
-                    }
-                    else { Debug.Log("Too far"); CurrentItem.OriginalObject.SetActive(false); RemoveGhostEffets(redGhostMaterial); }
-                    timeButton = 0;
-                }
-                itemDropped = false;
-                heldButton = false;
+                PutAndDropItem();
             }
         }
-        
-
-        if (heldButton && timeButton>1f)
-		{
-            if(putDistance < maxDistance)
-            {
-                if (redAdd) { RemoveGhostEffets(redGhostMaterial); }
-                PutGhostEffect();
-                ItemPut();
-            }
-            else
-            {
-                if (blueAdd) { RemoveGhostEffets(blueGhostMaterial); }
-                PutGhostEffectOutOfRange();
-                ItemPut();
-            }
-        }
+        ItemRayCast();
+        DetectionNewItemPos();
     }
-
-    void FixedUpdate()
+    private void ItemRayCast()
     {
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
@@ -145,6 +133,60 @@ public class PlayerInventory : MonoBehaviour
             Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
         }
     }
+
+    private void PutAndDropItem()
+    {
+        RemoveGhostEffets(blueGhostMaterial);
+        RemoveGhostEffets(redGhostMaterial);
+        timeButtonStart = false;
+        if (timeButton < 1.1f)
+        {
+            itemDropped = true;
+            ItemDrop();
+            timeButton = 0;
+        }
+        else
+        {
+
+            if (putDistance < maxDistance)
+            {
+                if (!itemDropped)
+                {
+                    CreateBigWeight();
+                }
+                RemoveItem(CurrentItem);
+            }
+            else { Debug.Log("Too far"); CurrentItem.OriginalObject.SetActive(false); }
+            timeButton = 0;
+        }
+        itemDropped = false;
+        heldButton = false;
+    }
+    private void CreateBigWeight()
+    {
+        Rigidbody rg = CurrentItem.OriginalObject.GetComponent<Rigidbody>();
+        rg.linearVelocity = Vector3.zero;
+        rg.angularDamping = 50;
+    }
+    private void DetectionNewItemPos()
+    {
+        if (heldButton && timeButton > 1f)
+        {
+            if (putDistance < maxDistance)
+            {
+                if (redAdd) { RemoveGhostEffets(redGhostMaterial); }
+                PutGhostEffect();
+                ItemPut();
+            }
+            else
+            {
+                if (blueAdd) { RemoveGhostEffets(blueGhostMaterial); }
+                PutGhostEffectOutOfRange();
+                ItemPut();
+            }
+        }
+    }
+
     private void PutGhostEffect()
     {
         if (blueAdd) { return; } 
@@ -181,6 +223,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void RemoveGhostEffets(Material m)
     {
+        if (!redAdd && !blueAdd) { return; }
         foreach (var renderer in renderers)
         {
             var materials = renderer.sharedMaterials.ToList();
@@ -207,7 +250,7 @@ public class PlayerInventory : MonoBehaviour
         {
             itemNewPos = new Vector3(
             h.x,
-            h.y + CurrentItem.OriginalObject.GetComponent<CapsuleCollider>().radius/2f,
+            h.y + CurrentItem.OriginalObject.GetComponent<CapsuleCollider>().radius/1.5f,
             h.z
             );
         }
@@ -215,7 +258,7 @@ public class PlayerInventory : MonoBehaviour
         {
             itemNewPos = new Vector3(
             h.x,
-            h.y + CurrentItem.OriginalObject.GetComponent<SphereCollider>().radius /2f,
+            h.y + CurrentItem.OriginalObject.GetComponent<SphereCollider>().radius /1.5f,
             h.z
             );
         }
