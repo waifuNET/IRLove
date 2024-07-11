@@ -33,6 +33,8 @@ public class PlayerInventory : MonoBehaviour
     public float maxDistance = 1.8f;
 
     public float rotationIndex = 18f;
+    public LayerMask ignoreLayer;
+    public LayerMask normLayer;
 
     Renderer[] renderers;
     public Material blueGhostMaterial;
@@ -111,6 +113,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 timeButtonStart = true;
                 heldButton = true;
+                
             }
             else if (Input.GetKeyUp(KeyCode.G))
             {
@@ -139,6 +142,7 @@ public class PlayerInventory : MonoBehaviour
     {
         RemoveGhostEffets(blueGhostMaterial);
         RemoveGhostEffets(redGhostMaterial);
+        MakeItemReal();
         timeButtonStart = false;
         if (timeButton < heldTime)
         {
@@ -175,6 +179,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (heldButton && timeButton > heldTime)
         {
+            MakeItemGhost();
             if (putDistance < maxDistance)
             {
                 if (redAdd) { RemoveGhostEffets(redGhostMaterial); }
@@ -312,6 +317,16 @@ public class PlayerInventory : MonoBehaviour
         origObj.SetActive(true);
         rg.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
         RemoveItem(CurrentItem);
+    }
+    private void MakeItemGhost()
+    {
+        Collider cd = CurrentItem.OriginalObject.GetComponent<Collider>();
+        cd.excludeLayers = ignoreLayer;
+    }
+    private void MakeItemReal()
+    {
+        Collider cd = CurrentItem.OriginalObject.GetComponent<Collider>();
+        cd.excludeLayers = normLayer;
     }
     private void ItemPut()
     {
