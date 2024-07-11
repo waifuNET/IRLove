@@ -526,8 +526,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6236016757207970292, guid: 40583b34958b2664babf40a8e7cbf6e4,
         type: 3}
+      propertyPath: heldTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6236016757207970292, guid: 40583b34958b2664babf40a8e7cbf6e4,
+        type: 3}
       propertyPath: indexPos
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6236016757207970292, guid: 40583b34958b2664babf40a8e7cbf6e4,
+        type: 3}
+      propertyPath: rotationIndex
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6236016757207970292, guid: 40583b34958b2664babf40a8e7cbf6e4,
         type: 3}
@@ -1841,6 +1851,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Flashlight_PICKUP
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136890923724365351, guid: 677ea4acc0654e14480bd79c64927a61,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

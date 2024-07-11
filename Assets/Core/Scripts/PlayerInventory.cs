@@ -25,13 +25,14 @@ public class PlayerInventory : MonoBehaviour
     public LayerMask layerMask;
     public Vector3 itemNewPos;
     private float timeButton;
+    public float heldTime;
     private bool timeButtonStart = false;
     private bool itemDropped = false;
     Vector3 tempPos;
     public float putDistance;
     public float maxDistance = 1.8f;
 
-    public float rotationIndex = 30f;
+    public float rotationIndex = 18f;
 
     Renderer[] renderers;
     public Material blueGhostMaterial;
@@ -86,14 +87,15 @@ public class PlayerInventory : MonoBehaviour
 
     private void ItemRotate()
     {
+        Rigidbody origObjrg = CurrentItem.OriginalObject.GetComponent<Rigidbody>();
+        origObjrg.interpolation = RigidbodyInterpolation.None;
+        origObjrg.constraints = RigidbodyConstraints.FreezeRotationY;
         Transform origObjTrans = CurrentItem.OriginalObject.transform;
-        float origObjRotZ = origObjTrans.rotation.z;
         if (Input.mouseScrollDelta.y != 0)
         {
-            origObjTrans.Rotate(Vector3.right * Input.mouseScrollDelta.y*rotationIndex);
+            
+            origObjTrans.Rotate(Vector3.up * Input.mouseScrollDelta.y * rotationIndex,Space.World);
         }
-
-
     }
     private void DropAndPutButton()
     {
@@ -139,7 +141,7 @@ public class PlayerInventory : MonoBehaviour
         RemoveGhostEffets(blueGhostMaterial);
         RemoveGhostEffets(redGhostMaterial);
         timeButtonStart = false;
-        if (timeButton < 1.1f)
+        if (timeButton < heldTime)
         {
             itemDropped = true;
             ItemDrop();
@@ -167,10 +169,12 @@ public class PlayerInventory : MonoBehaviour
         Rigidbody rg = CurrentItem.OriginalObject.GetComponent<Rigidbody>();
         rg.linearVelocity = Vector3.zero;
         rg.angularDamping = 50;
+        rg.constraints = RigidbodyConstraints.None;
+        rg.interpolation = RigidbodyInterpolation.Interpolate;
     }
     private void DetectionNewItemPos()
     {
-        if (heldButton && timeButton > 1f)
+        if (heldButton && timeButton > heldTime)
         {
             if (putDistance < maxDistance)
             {
@@ -197,7 +201,6 @@ public class PlayerInventory : MonoBehaviour
 
             materials.Add(blueGhostMaterial);
             blueAdd = true;
-            Debug.Log("Add blue");
 
             renderer.materials = materials.ToArray();
         }
@@ -214,7 +217,6 @@ public class PlayerInventory : MonoBehaviour
 
             materials.Add(redGhostMaterial);
             redAdd = true;
-            Debug.Log("Add red");
 
             renderer.materials = materials.ToArray();
         }
@@ -303,6 +305,8 @@ public class PlayerInventory : MonoBehaviour
         }
         Rigidbody rg = origObj.GetComponent<Rigidbody>();
         rg.mass = 1;
+        rg.interpolation = RigidbodyInterpolation.Interpolate;
+        rg.constraints = RigidbodyConstraints.None;
         rg.angularDamping = 1.75f;
         origObj.transform.position = PlayerCamera.transform.position;
         origObj.SetActive(true);
