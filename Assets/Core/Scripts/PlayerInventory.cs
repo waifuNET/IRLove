@@ -252,7 +252,7 @@ public class PlayerInventory : MonoBehaviour
         {
             itemNewPos = new Vector3(
             h.x,
-            h.y + CurrentItem.OriginalObject.GetComponent<CapsuleCollider>().radius/1.5f,
+            h.y + CurrentItem.OriginalObject.GetComponent<CapsuleCollider>().radius,
             h.z
             );
         }
@@ -260,7 +260,7 @@ public class PlayerInventory : MonoBehaviour
         {
             itemNewPos = new Vector3(
             h.x,
-            h.y + CurrentItem.OriginalObject.GetComponent<SphereCollider>().radius /1.5f,
+            h.y + CurrentItem.OriginalObject.GetComponent<SphereCollider>().radius,
             h.z
             );
         }
