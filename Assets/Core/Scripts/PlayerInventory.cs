@@ -46,6 +46,16 @@ public class PlayerInventory : MonoBehaviour
 
     public List<Items> inventory = new List<Items>();
 
+    public Dictionary<string, Quaternion> RotationDict = new Dictionary<string, Quaternion>();
+
+    public void SetDictNewRotation()
+    {
+        GameObject g = CurrentItem.OriginalObject.gameObject;
+        if(!RotationDict.ContainsKey(g.name))
+        {
+            RotationDict.Add(g.name, g.GetComponent<Transform>().rotation);
+        }
+    }
     void Start()
     {
         inventory.Add(new Items() { Name = "", gameObject = null });
@@ -98,7 +108,6 @@ public class PlayerInventory : MonoBehaviour
         if (Input.mouseScrollDelta.y != 0)
         {
             origObjTrans.Rotate(Vector3.up * Input.mouseScrollDelta.y * rotationIndex,Space.World);
-            finalrotation = origObjTrans.rotation;
         }
     }
     
@@ -170,6 +179,7 @@ public class PlayerInventory : MonoBehaviour
         itemDropped = false;
         heldButton = false;
     }
+    
     private void CreateBigWeight()
     {
         Rigidbody rg = CurrentItem.OriginalObject.GetComponent<Rigidbody>();
@@ -273,6 +283,7 @@ public class PlayerInventory : MonoBehaviour
             );
         }
     }
+    
     public void ItemSwitch()
 	{
         if(inventoryItemScrollPosition > inventory.Count-1 || inventoryItemScrollPosition < 0)

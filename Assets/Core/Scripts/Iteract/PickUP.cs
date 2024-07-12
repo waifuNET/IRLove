@@ -14,12 +14,13 @@ public class PickUP : MonoBehaviour, Iteraction
 	}
 	public void Iterction()
 	{
-		if (!inventory.heldButton)
+		if (!inventory.heldButton && inventory.inventory.Count < 5)
 		{
 			inventory.inventory.Add(new Items() { Name = name, gameObject = TakeGameobject, OriginalObject = gameObject });
-			inventory.inventoryItemScrollPosition = inventory.inventory.Count - 1;
+            inventory.inventoryItemScrollPosition = inventory.inventory.Count - 1;
             inventory.ItemSwitch();
-			gameObject.SetActive(false);
+			inventory.SetDictNewRotation();
+            gameObject.SetActive(false);
 		}
 	}
 
