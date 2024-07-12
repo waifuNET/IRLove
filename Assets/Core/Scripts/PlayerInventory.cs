@@ -36,6 +36,8 @@ public class PlayerInventory : MonoBehaviour
     public LayerMask ignoreLayer;
     public LayerMask normLayer;
 
+    public Quaternion finalrotation;
+
     Renderer[] renderers;
     public Material blueGhostMaterial;
     public Material redGhostMaterial;
@@ -86,7 +88,7 @@ public class PlayerInventory : MonoBehaviour
             ItemSwitch();
         }
     }
-
+    
     private void ItemRotate()
     {
         Rigidbody origObjrg = CurrentItem.OriginalObject.GetComponent<Rigidbody>();
@@ -95,10 +97,11 @@ public class PlayerInventory : MonoBehaviour
         Transform origObjTrans = CurrentItem.OriginalObject.transform;
         if (Input.mouseScrollDelta.y != 0)
         {
-            
             origObjTrans.Rotate(Vector3.up * Input.mouseScrollDelta.y * rotationIndex,Space.World);
+            finalrotation = origObjTrans.rotation;
         }
     }
+    
     private void DropAndPutButton()
     {
         if (timeButtonStart)
@@ -308,20 +311,22 @@ public class PlayerInventory : MonoBehaviour
             rr.mass = 1;
             rr.angularDamping = 1.75f;
         }
-        Rigidbody rg = origObj.GetComponent<Rigidbody>();
-        rg.mass = 1;
-        rg.interpolation = RigidbodyInterpolation.Interpolate;
-        rg.constraints = RigidbodyConstraints.None;
-        rg.angularDamping = 1.75f;
+        Rigidbody rb = origObj.GetComponent<Rigidbody>();
+        rb.mass = 1;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.constraints = RigidbodyConstraints.None;
+        rb.angularDamping = 1.75f;
         origObj.transform.position = PlayerCamera.transform.position;
         origObj.SetActive(true);
-        rg.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
+        rb.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
         RemoveItem(CurrentItem);
     }
     private void MakeItemGhost()
     {
         Collider cd = CurrentItem.OriginalObject.GetComponent<Collider>();
         cd.excludeLayers = ignoreLayer;
+        Rigidbody rb = CurrentItem.OriginalObject.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
     private void MakeItemReal()
     {

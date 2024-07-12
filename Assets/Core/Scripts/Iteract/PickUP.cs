@@ -18,7 +18,7 @@ public class PickUP : MonoBehaviour, Iteraction
 		{
 			inventory.inventory.Add(new Items() { Name = name, gameObject = TakeGameobject, OriginalObject = gameObject });
 			inventory.inventoryItemScrollPosition = inventory.inventory.Count - 1;
-			inventory.ItemSwitch();
+            inventory.ItemSwitch();
 			gameObject.SetActive(false);
 		}
 	}
