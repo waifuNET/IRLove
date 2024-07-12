@@ -78,6 +78,8 @@ public class PlayerInventory : MonoBehaviour
             ItemIteract(GetIteract(CurrentItem.gameObject));
         }
 
+        if (!heldButton) _normalRotation = false;
+
         DropAndPutButton();
     }
 
@@ -110,7 +112,8 @@ public class PlayerInventory : MonoBehaviour
             origObjTrans.Rotate(Vector3.up * Input.mouseScrollDelta.y * rotationIndex,Space.World);
         }
     }
-    
+
+    private bool _normalRotation = false;
     private void DropAndPutButton()
     {
         if (timeButtonStart)
@@ -164,7 +167,6 @@ public class PlayerInventory : MonoBehaviour
         }
         else
         {
-
             if (putDistance < maxDistance)
             {
                 if (!itemDropped)
@@ -192,7 +194,11 @@ public class PlayerInventory : MonoBehaviour
     {
         if (heldButton && timeButton > heldTime)
         {
-            MakeItemGhost();
+			if (!_normalRotation) CurrentItem.OriginalObject.transform.rotation =
+		CurrentItem.OriginalObject.GetComponent<IPickUpInfo>().GetRotation();
+			_normalRotation = true;
+
+			MakeItemGhost();
             if (putDistance < maxDistance)
             {
                 if (redAdd) { RemoveGhostEffets(redGhostMaterial); }

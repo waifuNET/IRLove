@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PickUP : MonoBehaviour, Iteraction
+public class PickUP : MonoBehaviour, Iteraction, IPickUpInfo
 {
 	private PlayerInventory inventory;
 	public GameObject TakeGameobject;
@@ -11,6 +11,7 @@ public class PickUP : MonoBehaviour, Iteraction
 	private void Start()
 	{
 		inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+		_startedRotation = gameObject.transform.rotation;
 	}
 	public void Iterction()
 	{
@@ -24,4 +25,9 @@ public class PickUP : MonoBehaviour, Iteraction
 		}
 	}
 
+	private Quaternion _startedRotation;
+	public Quaternion GetRotation()
+	{
+		return _startedRotation == null ? Quaternion.identity : _startedRotation;
+	}
 }

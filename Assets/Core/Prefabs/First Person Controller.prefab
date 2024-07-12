@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 5520133403048135292}
   - component: {fileID: 6759920255861105981}
   - component: {fileID: 6236016757207970292}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: First Person Controller
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -671,6 +671,13 @@ MonoBehaviour:
   putDistance: 0
   maxDistance: 1.8
   rotationIndex: 30
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 136
+  normLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  finalrotation: {x: 0, y: 0, z: 0, w: 0}
   blueGhostMaterial: {fileID: 2100000, guid: 14e7f34d2c6f56e47a2c2db725205f6d, type: 2}
   redGhostMaterial: {fileID: 2100000, guid: 4d36eef913c176e4c85a58fd849c629e, type: 2}
   inventory: []
@@ -2138,7 +2145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceThreshold: 0.15
-  isGrounded: 0
+  isGrounded: 1
 --- !u!1 &9179609040558046387
 GameObject:
   m_ObjectHideFlags: 0
