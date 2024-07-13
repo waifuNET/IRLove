@@ -5,10 +5,13 @@ using UnityEngine;
 public class LookAtItem : MonoBehaviour, ItemInterface
 {
 	public bool status;
+	private Transform player;
+	private Transform camera;
 	public GameObject texture;
 	private GameObject _lookAtItem;
 	private PlayerInventory inventory;
 	private FirstPersonLook FPL;
+	private Quaternion _lastRotation;
 
 	public float rotationSpeed = 100.0f;
 	private bool isRotating;
@@ -41,22 +44,37 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 	{
 		if (_lookAtItem == null)
 		{
-			GameObject player = GameObject.FindGameObjectWithTag("Player");
+			player = GameObject.FindGameObjectWithTag("Player").transform;
+			camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 			inventory = player.GetComponent<PlayerInventory>();
 			FPL = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
 			_lookAtItem = GameObject.Find("LookAtItem");
-			gameObject.GetComponent<GoToObject>().lockRotation = true;
 		}
+		_lastRotation = transform.rotation;
 	}
 
-	private void Update()
+	private void LockRotate(bool state)
+	{
+		if (gameObject != null)
+			gameObject.GetComponent<GoToObject>().lockRotation = state;
+	}
+
+	void Update()
 	{
 		if (!status) return;
+
+		if (!isRotating)
+		{
+			transform.rotation = camera.rotation * _lastRotation;
+		}
+
 		if (Input.GetMouseButtonDown(0))
 		{
 			isRotating = true;
 			FPL.LockCamera();
+			LockRotate(true);
 		}
+
 		if (isRotating)
 		{
 			float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
@@ -65,12 +83,15 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 			transform.Rotate(Vector3.up, -mouseX, Space.World);
 			transform.Rotate(Vector3.right, mouseY, Space.World);
 
-			transform.position = _lookAtItem.transform.position;
+			//transform.position = _lookAtItem.transform.position; 
+			_lastRotation = Quaternion.Inverse(camera.rotation) * transform.rotation;
 		}
+
 		if (Input.GetMouseButtonUp(0))
 		{
 			isRotating = false;
 			FPL.UnLockCamera();
+			LockRotate(false);
 		}
 	}
 }

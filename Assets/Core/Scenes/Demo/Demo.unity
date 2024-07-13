@@ -737,7 +737,7 @@ MonoBehaviour:
   target: {fileID: 179563643}
   followSpeed: 20
   offsetRotation: {x: 0, y: 0, z: 0}
-  offsetPosition: {x: 0, y: 0, z: 0}
+  offsetPosition: {x: 0, y: -0.13, z: 0}
   lockRotation: 0
   lockPostiton: 0
 --- !u!114 &417415086
@@ -2290,17 +2290,17 @@ PrefabInstance:
     - target: {fileID: 790963721537879122, guid: 7926bdcfcd1fffc4b93aea1e6d201d5c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.37
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 790963721537879122, guid: 7926bdcfcd1fffc4b93aea1e6d201d5c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.37
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 790963721537879122, guid: 7926bdcfcd1fffc4b93aea1e6d201d5c,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.37
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 790963721537879122, guid: 7926bdcfcd1fffc4b93aea1e6d201d5c,
         type: 3}
