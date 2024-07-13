@@ -8,10 +8,16 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 	public GameObject texture;
 	private GameObject _lookAtItem;
 	private PlayerInventory inventory;
+	private FirstPersonLook FPL;
+
+	public float rotationSpeed = 100.0f;
+	private bool isRotating;
+
 	public void ChangeItem()
 	{
 		status = false;
 		texture.SetActive(false);
+		if (FPL != null) FPL.UnLockCamera();
 	}
 
 	public bool GetStatus()
@@ -21,18 +27,50 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 
 	public void Iterction()
 	{
-		if(_lookAtItem == null)
-		{
-			GameObject player = GameObject.FindGameObjectWithTag("Player");
-			inventory = player.GetComponent<PlayerInventory>();
-			_lookAtItem = player.transform.Find("LookAtItem").gameObject;
-		}
-		
+
 	}
 
 	public void PickedItem()
 	{
 		status = true;
 		texture.SetActive(true);
+		if (FPL != null) FPL.UnLockCamera();
+	}
+
+	private void Start()
+	{
+		if (_lookAtItem == null)
+		{
+			GameObject player = GameObject.FindGameObjectWithTag("Player");
+			inventory = player.GetComponent<PlayerInventory>();
+			FPL = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
+			_lookAtItem = GameObject.Find("LookAtItem");
+			gameObject.GetComponent<GoToObject>().lockRotation = true;
+		}
+	}
+
+	private void Update()
+	{
+		if (!status) return;
+		if (Input.GetMouseButtonDown(0))
+		{
+			isRotating = true;
+			FPL.LockCamera();
+		}
+		if (isRotating)
+		{
+			float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
+			float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+
+			transform.Rotate(Vector3.up, -mouseX, Space.World);
+			transform.Rotate(Vector3.right, mouseY, Space.World);
+
+			transform.position = _lookAtItem.transform.position;
+		}
+		if (Input.GetMouseButtonUp(0))
+		{
+			isRotating = false;
+			FPL.UnLockCamera();
+		}
 	}
 }

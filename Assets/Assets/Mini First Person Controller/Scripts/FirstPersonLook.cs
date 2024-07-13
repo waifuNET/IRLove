@@ -10,6 +10,21 @@ public class FirstPersonLook : MonoBehaviour
     Vector2 velocity;
     Vector2 frameVelocity;
 
+    private bool CameraLock = false;
+    private Quaternion _lastRotation = Quaternion.identity;
+
+    public void LockCamera()
+    {
+		CameraLock = true;
+	}
+    public bool CameraIsLocked()
+    {
+        return CameraLock;
+	}
+    public void UnLockCamera()
+    {
+        CameraLock = false;
+	}
 
     void Reset()
     {
@@ -25,8 +40,11 @@ public class FirstPersonLook : MonoBehaviour
 
     void Update()
     {
-        // Get smooth velocity.
-        Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        if (CameraLock) { transform.rotation = _lastRotation; return; }
+        _lastRotation = transform.rotation;
+
+		// Get smooth velocity.
+		Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
         Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);
         frameVelocity = Vector2.Lerp(frameVelocity, rawFrameVelocity, 1 / smoothing);
         velocity += frameVelocity;

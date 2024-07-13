@@ -10,7 +10,10 @@ public class GoToObject : MonoBehaviour
 	public Vector3 offsetRotation = Vector3.zero;
 	public Vector3 offsetPosition = Vector3.zero;
 
-	void FixedUpdate()
+	public bool lockRotation = false;
+	public bool lockPostiton = false;
+
+	void Update()
 	{
 		if (target == null) return;
 
@@ -19,11 +22,14 @@ public class GoToObject : MonoBehaviour
 
 		if (permament)
 		{
-			transform.position = desiredPosition;
-			transform.rotation = target.rotation * Quaternion.Euler(offsetRotation);
+			if (!lockPostiton)
+				transform.position = desiredPosition;
+			if (!lockRotation)
+				transform.rotation = target.rotation * Quaternion.Euler(offsetRotation);
 		}
 		else
 		{
+			if(!lockPostiton)
 			transform.position = smoothedPosition;
 		}
 	}
