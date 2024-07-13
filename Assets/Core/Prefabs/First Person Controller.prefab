@@ -1047,7 +1047,7 @@ MonoBehaviour:
   cam: {fileID: 6152114917178790770}
   layerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 520
   IterctObj: {fileID: 0}
 --- !u!114 &4478082008033850349
 MonoBehaviour:

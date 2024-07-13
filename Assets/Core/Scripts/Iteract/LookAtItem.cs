@@ -12,6 +12,7 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 	private PlayerInventory inventory;
 	private FirstPersonLook FPL;
 	private Quaternion _lastRotation;
+	private GoToObject gotoObject;
 
 	public float rotationSpeed = 100.0f;
 	private bool isRotating;
@@ -49,14 +50,15 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 			inventory = player.GetComponent<PlayerInventory>();
 			FPL = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
 			_lookAtItem = GameObject.Find("LookAtItem");
+			gotoObject = gameObject.GetComponent<GoToObject>();
 		}
 		_lastRotation = transform.rotation;
 	}
 
 	private void LockRotate(bool state)
 	{
-		if (gameObject != null)
-			gameObject.GetComponent<GoToObject>().lockRotation = state;
+		if (gotoObject != null)
+			gotoObject.lockRotation = state;
 	}
 
 	void Update()
