@@ -1,16 +1,21 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DOpenFurniture : MonoBehaviour, Iteraction
 {
 	public bool status = false;
 	public bool permOpen = false;
 	public bool autoStartPosition = true;
+	public bool autoStartRotation = true;
 
-	public Vector3 startPosition;
+
+    public Vector3 startPosition;
 	public Vector3 needPosition;
 	private Vector3 _needPosition;
-	private void Start()
+	
+
+    private void Start()
 	{
 		_needPosition = needPosition;
 		if (autoStartPosition)
@@ -22,10 +27,16 @@ public class DOpenFurniture : MonoBehaviour, Iteraction
 		if (!permOpen)
 			status = !status;
 		if (status)
+		{
 			transform.DOMove(needPosition, 1);
+        }
+			
 		else
-			transform.DOMove(startPosition, 1);
-		permOpen = false;
+		{
+            transform.DOMove(startPosition, 1);
+        }
+
+        permOpen = false;
 	}
 
 	public void SetActive(bool status)
