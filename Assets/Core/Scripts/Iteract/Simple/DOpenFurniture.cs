@@ -15,6 +15,7 @@ public class DOpenFurniture : MonoBehaviour, Iteraction
 
 	public Quaternion startRotation;
     public Vector3 needRotation;
+	public bool isBusy=false;
 
 
 
@@ -33,16 +34,19 @@ public class DOpenFurniture : MonoBehaviour, Iteraction
 		if (status)
 		{
 			transform.DOMove(needPosition, 1);
-			transform.DORotate(needRotation,1,RotateMode.LocalAxisAdd);
+            isBusy = true;
+            transform.DORotate(needRotation,1,RotateMode.WorldAxisAdd);
         }
 			
 		else
 		{
             transform.DOMove(startPosition, 1);
-			transform.DORotate(-needRotation, 1, RotateMode.LocalAxisAdd);
+            isBusy = true;
+            transform.DORotate(-needRotation, 1, RotateMode.WorldAxisAdd);
         }
 
         permOpen = false;
+		isBusy = false;
 	}
 
 	public void SetActive(bool status)
