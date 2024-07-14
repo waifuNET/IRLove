@@ -36,13 +36,13 @@ public class DOpenFurniture : MonoBehaviour, Iteraction
 		if (status)
 		{
 			transform.DOMove(needPosition, 1);
-			transform.DORotate(needRotation, 1, rotateMode);
+			transform.DORotate(needRotation, 0.7f, rotateMode);
         }
 			
 		else
 		{
             transform.DOMove(startPosition, 1);
-			transform.DORotate(startRotation, 1, rotateMode);
+			transform.DORotate(startRotation, 0.7f, rotateMode);
 			
 
         }
