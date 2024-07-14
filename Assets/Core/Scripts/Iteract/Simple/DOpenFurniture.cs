@@ -6,24 +6,23 @@ public class DOpenFurniture : MonoBehaviour, Iteraction
 {
 	public bool status = false;
 	public bool permOpen = false;
-	public bool autoStartPosition = true;
+	public bool useLocaleCoordinatePosition = true;
+	public RotateMode rotateMode = RotateMode.Fast;
 
 
-    public Vector3 startPosition;
+	[HideInInspector] public Vector3 startPosition;
 	public Vector3 needPosition;
 	private Vector3 _needPosition;
 
-	public Vector3 startRotation;
+	[HideInInspector] public Vector3 startRotation;
     public Vector3 needRotation;
-	public Vector3 tempRotationToStart;
-	public Vector3 tempRotationToEnd;
 
 
 
     private void Start()
 	{
         _needPosition = needPosition;
-		if (autoStartPosition)
+		if (useLocaleCoordinatePosition)
 			startPosition = transform.position;
 	}
 	
@@ -35,13 +34,13 @@ public class DOpenFurniture : MonoBehaviour, Iteraction
 		if (status)
 		{
 			transform.DOMove(needPosition, 1);
-			transform.DORotate(needRotation, 1);
+			transform.DORotate(needRotation, 1, rotateMode);
         }
 			
 		else
 		{
             transform.DOMove(startPosition, 1);
-			transform.DORotate(startRotation, 1);
+			transform.DORotate(startRotation, 1, rotateMode);
 			
 
         }
