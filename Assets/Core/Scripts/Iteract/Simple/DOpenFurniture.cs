@@ -24,7 +24,9 @@ public class DOpenFurniture : MonoBehaviour, Iteraction
         _needPosition = needPosition;
 		if (useLocaleCoordinatePosition)
 			startPosition = transform.position;
-	}
+			
+
+    }
 	
     public void Iterction()
 	{
