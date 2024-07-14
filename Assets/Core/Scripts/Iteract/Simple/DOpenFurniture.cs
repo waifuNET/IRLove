@@ -26,20 +26,7 @@ public class DOpenFurniture : MonoBehaviour, Iteraction
 		if (autoStartPosition)
 			startPosition = transform.position;
 	}
-	private void FixedUpdate()
-	{
-		if (needRotation.x >= 0 && needRotation.y >= 0 && needRotation.z >=0)
-		{
-			tempRotationToStart = startRotation - transform.eulerAngles;
-			tempRotationToEnd = needRotation - transform.eulerAngles;
-		}
-		else if (needRotation.x <= 0 && needRotation.y <= 0 && needRotation.z <= 0)
-		{
-            tempRotationToStart = startRotation + transform.eulerAngles;
-            tempRotationToEnd = needRotation + transform.eulerAngles;
-        }
-		
-    }
+	
     public void Iterction()
 	{
 		needPosition = startPosition + _needPosition;
@@ -48,13 +35,15 @@ public class DOpenFurniture : MonoBehaviour, Iteraction
 		if (status)
 		{
 			transform.DOMove(needPosition, 1);
-			transform.DORotate(tempRotationToEnd, 1,RotateMode.WorldAxisAdd);
+			transform.DORotate(needRotation, 1);
         }
 			
 		else
 		{
             transform.DOMove(startPosition, 1);
-			transform.DORotate(tempRotationToStart, 1, RotateMode.WorldAxisAdd);
+			transform.DORotate(startRotation, 1);
+			
+
         }
 
         permOpen = false;
