@@ -43,7 +43,7 @@ public class PlayerIteract : MonoBehaviour
 		}
 
 
-		if (IterctObj && Input.GetKeyDown(KeyCode.E))
+		if (IterctObj && Input.GetKeyDown(KeyCode.E) && IterctObj.GetComponent<Iteraction>() != null)
 		{
 			IterctObj.GetComponent<Iteraction>().Iterction();
 		}
