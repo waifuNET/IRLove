@@ -61,7 +61,6 @@ public class PlayerInventory : MonoBehaviour
         inventory.Add(new Items() { Name = "", gameObject = null });
         PlayerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
-
     void Update()
     {
         if(!timeButtonStart)
@@ -82,7 +81,6 @@ public class PlayerInventory : MonoBehaviour
 
         DropAndPutButton();
     }
-
     private void ItemScroll()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
