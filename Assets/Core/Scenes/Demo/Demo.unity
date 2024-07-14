@@ -2220,7 +2220,7 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0, z: 0}
   needPosition: {x: 1, y: 0, z: 1}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
-  needRotation: {x: 0, y: 0.7933533, z: 0, w: 0.6087614}
+  needRotation: {x: 0, y: -0.7933533, z: 0, w: 0.6087614}
 --- !u!65 &1574039413
 BoxCollider:
   m_ObjectHideFlags: 0
