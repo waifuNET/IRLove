@@ -36,13 +36,13 @@ public class DOpenFurniture : MonoBehaviour, Iteraction
 		if (status)
 		{
 			transform.DOMove(needPosition, 1);
-			transform.DORotate(needRotation.y * Vector3.up,1,RotateMode.WorldAxisAdd);
+			transform.DORotate(new Vector3(needRotation.eulerAngles.x,needRotation.eulerAngles.y,needRotation.eulerAngles.z),1,RotateMode.WorldAxisAdd);
         }
 			
 		else
 		{
             transform.DOMove(startPosition, 1);
-			transform.DORotate(startRotation * Vector3.down, 1, RotateMode.WorldAxisAdd);
+			transform.DORotate(new Vector3(-needRotation.eulerAngles.x, -needRotation.eulerAngles.y, -needRotation.eulerAngles.z), 1, RotateMode.WorldAxisAdd);
         }
 
         permOpen = false;
