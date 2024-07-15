@@ -176,6 +176,8 @@ public class PlayerInventory : MonoBehaviour
             var materials = renderer.sharedMaterials.ToList();
 
             materials.Add(blueGhostMaterial);
+            MeshRenderer mr = CurrentItem.OriginalObject.GetComponent<MeshRenderer>();
+            mr.material = blueGhostMaterial;
             blueAdd = true;
 
             renderer.materials = materials.ToArray();
@@ -269,7 +271,7 @@ public class PlayerInventory : MonoBehaviour
         if (heldButton && timeButton > heldTime)
         {
             if (!_normalRotation) CurrentItem.OriginalObject.transform.rotation =
-        CurrentItem.OriginalObject.GetComponent<IPickUpInfo>().GetRotation();
+                    CurrentItem.OriginalObject.GetComponent<IPickUpInfo>().GetRotation();
             _normalRotation = true;
 
             MakeItemGhost();
