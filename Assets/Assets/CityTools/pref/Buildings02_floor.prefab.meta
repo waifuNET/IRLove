@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 01b118cebc9b71348971e05d5807dd03
+timeCreated: 1493736861
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/pref/Buildings02_floor.prefab
+  uploadId: 178376

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fea3cef013c91864baea49cea9d7f5c2
+timeCreated: 1476962388
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/piso_madeira_01.mat
+  uploadId: 178376

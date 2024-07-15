@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fcd96c6b09ce2714d950bba809f93685
+timeCreated: 1493983741
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Bulding03/Materials/Cube.000_Cube.004_Cube.000_Cube.004_Material.005Mat.mat
+  uploadId: 178376

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f1a9a6041daf6954b987c25e16c765f0
+timeCreated: 1553412869
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142672
+  packageName: townhouse
+  packageVersion: 1.0
+  assetPath: Assets/House/demo.unity
+  uploadId: 302425

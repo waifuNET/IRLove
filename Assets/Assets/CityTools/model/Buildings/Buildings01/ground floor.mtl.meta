@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3f096d80ccb928344a8923ed2fef6707
+timeCreated: 1492605083
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings01/ground floor.mtl
+  uploadId: 178376

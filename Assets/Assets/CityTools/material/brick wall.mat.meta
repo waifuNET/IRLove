@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ef9e32c764941934c872eba6666d3bb6
+timeCreated: 1476828812
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/brick wall.mat
+  uploadId: 178376

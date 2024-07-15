@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a8cd893a53efb3146bcf231e92b0e9c7
+timeCreated: 1492783326
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings02/Buildings02_floor.mtl
+  uploadId: 178376

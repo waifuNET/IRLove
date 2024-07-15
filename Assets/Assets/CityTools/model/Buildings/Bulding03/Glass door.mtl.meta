@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6b0d193c0ce5ed04db1e954fc655f9b7
+timeCreated: 1492801728
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Bulding03/Glass door.mtl
+  uploadId: 178376

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d9f3e3fe6fbf99641bf713f4891cab2b
+timeCreated: 1492603435
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings01/ap01_door.mtl
+  uploadId: 178376

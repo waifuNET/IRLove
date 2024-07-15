@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 813fed820e7f8154c8b6c3363ab27f25
+timeCreated: 1492801728
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Bulding03/hotel door.mtl
+  uploadId: 178376

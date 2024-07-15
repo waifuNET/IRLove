@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fcaad404773b9b94b9ac08d30ea7668c
+timeCreated: 1492602278
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings01/ap01_Rooftop exitobj.mtl
+  uploadId: 178376

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b1ffbf525c7107644b8524c670c31d01
+timeCreated: 1493727396
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings01/Materials/bordas_Plane.007_paredeMat.mat
+  uploadId: 178376

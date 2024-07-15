@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2b6b09a42bf919942aad30ff81cb5cc6
+timeCreated: 1476963466
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/piso_cosinha.mat
+  uploadId: 178376

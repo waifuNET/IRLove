@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 05915e78034600746af444111b4458a1
+timeCreated: 1492533559
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings01/saida.mtl
+  uploadId: 178376

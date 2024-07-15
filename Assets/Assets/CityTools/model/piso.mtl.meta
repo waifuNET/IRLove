@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0f0101e1e0c5b184ca9c1e26663f0964
+timeCreated: 1493760951
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/piso.mtl
+  uploadId: 178376

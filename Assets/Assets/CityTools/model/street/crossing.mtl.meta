@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 61f61febca87e4e418d79243b902ba94
+timeCreated: 1492634810
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/street/crossing.mtl
+  uploadId: 178376

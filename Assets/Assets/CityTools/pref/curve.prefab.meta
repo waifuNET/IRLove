@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6a1980f1c2e01e146b5ed05619fb9535
+timeCreated: 1493734882
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/pref/curve.prefab
+  uploadId: 178376

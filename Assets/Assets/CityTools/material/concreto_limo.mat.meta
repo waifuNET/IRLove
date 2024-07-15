@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 675cd71acf908b94798d5af5229e4b79
+timeCreated: 1476961891
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/concreto_limo.mat
+  uploadId: 178376

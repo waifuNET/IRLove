@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 862bb8c4f54087d488fb922fa5438c70
+timeCreated: 1476964095
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/piso_concreto_polido.mat
+  uploadId: 178376

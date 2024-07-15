@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 647e10401a251bf4ca1a343c04a11b8f
+timeCreated: 1493727372
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings01/Materials/paredeTijolo_color.mat
+  uploadId: 178376

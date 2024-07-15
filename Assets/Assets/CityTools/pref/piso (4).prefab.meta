@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: be1e3550e66add64abe9332726deb1d2
+timeCreated: 1493762379
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/pref/piso (4).prefab
+  uploadId: 178376

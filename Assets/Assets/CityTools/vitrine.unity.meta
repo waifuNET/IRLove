@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fca01575de5de434eb9ca4cd30ef14ff
+timeCreated: 1493728433
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/vitrine.unity
+  uploadId: 178376

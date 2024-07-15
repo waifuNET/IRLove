@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: ca33c411fdfdaf3439e2385f2b86236f
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 2282
+  packageName: Kiosk
+  packageVersion: 1.1
+  assetPath: Assets/Kiosk/example_scene.unity
+  uploadId: 523788

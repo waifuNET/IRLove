@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6ba00c598ea09684f94cf3e8321d77ac
+timeCreated: 1492783326
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings02/Buildings02_ceiling.mtl
+  uploadId: 178376

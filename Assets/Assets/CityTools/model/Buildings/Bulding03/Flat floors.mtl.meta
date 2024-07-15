@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5db19a05809a11846975ab794e5389a9
+timeCreated: 1492801728
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Bulding03/Flat floors.mtl
+  uploadId: 178376

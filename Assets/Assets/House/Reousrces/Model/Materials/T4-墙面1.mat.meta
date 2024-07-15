@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c164035790b15a6459ebda2278d0b83c
+timeCreated: 1553412850
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 142672
+  packageName: townhouse
+  packageVersion: 1.0
+  assetPath: "Assets/House/Reousrces/Model/Materials/T4-\u5899\u97621.mat"
+  uploadId: 302425

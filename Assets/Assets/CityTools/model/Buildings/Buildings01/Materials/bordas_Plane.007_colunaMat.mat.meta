@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3838fb642b14d9549af2f97ac5d4d421
+timeCreated: 1493727395
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings01/Materials/bordas_Plane.007_colunaMat.mat
+  uploadId: 178376

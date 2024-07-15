@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 12d387fda829a5d42aa52efd585b8e81
+timeCreated: 1476962283
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/piso01.mat
+  uploadId: 178376

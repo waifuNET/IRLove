@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ced06c78b71248a48bbeb7cd509349a1
+timeCreated: 1492785675
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings02/Buildings02_Commercial
+    door stop.mtl
+  uploadId: 178376

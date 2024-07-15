@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8585e77e59c51f143b87ea55167cbc35
+timeCreated: 1492785675
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings02/Materials/defaultMat.mat
+  uploadId: 178376

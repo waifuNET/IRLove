@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e00da9ae3d6b92741ad67b8dce6b2caa
+timeCreated: 1492634810
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/street/Materials/asfalt.mat
+  uploadId: 178376

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d55459f69f7ac8f43a3b4c85f6bb8e54
+timeCreated: 1493727367
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings01/Materials/batente_placa_concreto_suja.png.mat
+  uploadId: 178376

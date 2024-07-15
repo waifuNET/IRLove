@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0c7775ddb915f1e40aedd1c764e6491f
+timeCreated: 1476961011
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/concreto.mat
+  uploadId: 178376

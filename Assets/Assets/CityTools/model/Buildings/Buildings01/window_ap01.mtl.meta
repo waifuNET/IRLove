@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1c10951e1e590484e8dfa8dea8d58daf
+timeCreated: 1492602126
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings01/window_ap01.mtl
+  uploadId: 178376

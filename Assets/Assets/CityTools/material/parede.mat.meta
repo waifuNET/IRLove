@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fb174f946199d9d4baf291161812d98c
+timeCreated: 1476962060
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/parede.mat
+  uploadId: 178376

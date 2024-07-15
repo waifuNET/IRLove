@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1bcd71be97075e24fb6afa70b564dcd5
+timeCreated: 1492634524
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/street/Corner_T.mtl
+  uploadId: 178376

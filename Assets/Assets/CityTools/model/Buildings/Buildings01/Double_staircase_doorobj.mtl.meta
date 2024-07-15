@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 35e5764c847deef459f52a65ccd287e7
+timeCreated: 1492605083
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings01/Double_staircase_doorobj.mtl
+  uploadId: 178376

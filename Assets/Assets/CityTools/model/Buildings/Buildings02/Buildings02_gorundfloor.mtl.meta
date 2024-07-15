@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f913ddd2457aa494a8f42c11d61b2806
+timeCreated: 1492783326
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Buildings02/Buildings02_gorundfloor.mtl
+  uploadId: 178376

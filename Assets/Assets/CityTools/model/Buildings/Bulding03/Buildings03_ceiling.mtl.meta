@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8003ede86068d5341803d250c6f274a5
+timeCreated: 1492803773
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/model/Buildings/Bulding03/Buildings03_ceiling.mtl
+  uploadId: 178376

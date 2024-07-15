@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 454704caca2d6974bba6f2e83e63dc64
+timeCreated: 1477257123
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/vidro.mat
+  uploadId: 178376

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 40052c6b7a3746241af96398d9818e33
+timeCreated: 1477256804
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/concreto_musgo.mat
+  uploadId: 178376

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fdd6a5be0878d4449be3ea4b75e02caa
+timeCreated: 1477334942
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 88707
+  packageName: CityTools
+  packageVersion: 0.5
+  assetPath: Assets/CityTools/material/Metal02.mat
+  uploadId: 178376
