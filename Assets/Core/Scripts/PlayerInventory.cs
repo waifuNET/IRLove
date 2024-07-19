@@ -44,6 +44,8 @@ public class PlayerInventory : MonoBehaviour
     private bool blueAdd;
     private bool redAdd;
 
+    public bool canRotate = true;
+
     public List<Items> inventory = new List<Items>();
 
     public Dictionary<string, Quaternion> RotationDict = new Dictionary<string, Quaternion>();
@@ -100,7 +102,10 @@ public class PlayerInventory : MonoBehaviour
     }
     
     private bool _normalRotation = false;
-    
+    private void OnDrawGizmos()
+    {
+            Gizmos.DrawSphere(tempPos, 0.3f);
+    }
     //RayCast
     private void ItemRayCast()
     {
@@ -160,7 +165,7 @@ public class PlayerInventory : MonoBehaviour
 	private void RemoveItem(Items item)
 	{
 		if (item == null) return;
-        GetIteract(item.gameObject).ChangeItem();
+        GetIteract(item.gameObject)?.ChangeItem();
         inventoryItemScrollPosition -= 1;
         ItemSwitch();
         inventory.Remove(item);
@@ -273,7 +278,8 @@ public class PlayerInventory : MonoBehaviour
             if (!_normalRotation) CurrentItem.OriginalObject.transform.rotation =
                     CurrentItem.OriginalObject.GetComponent<IPickUpInfo>().GetRotation();
             _normalRotation = true;
-
+            if (CurrentItem.gameObject.GetComponent<LookAtItem>() != null)
+                CurrentItem.gameObject.GetComponent<LookAtItem>().texture.SetActive(false);
             MakeItemGhost();
             if (putDistance < maxDistance)
             {
@@ -298,8 +304,8 @@ public class PlayerInventory : MonoBehaviour
         {
             itemNewPos = new Vector3(
             h.x,
-            h.y,
-            h.z + CurrentItem.OriginalObject.GetComponent<BoxCollider>().size.z / 2f
+            h.y + CurrentItem.OriginalObject.transform.localScale.y / 2f,
+            h.z
 
             );
         }
@@ -375,12 +381,14 @@ public class PlayerInventory : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
+                canRotate = false;
                 timeButtonStart = true;
                 heldButton = true;
 
             }
             else if (Input.GetKeyUp(KeyCode.G))
             {
+                canRotate = true;
                 PutAndDropItem();
             }
         }

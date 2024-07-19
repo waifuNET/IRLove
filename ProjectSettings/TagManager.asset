@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Iteract
   - PlayerMessageUI
+  - Target
   layers:
   - Default
   - TransparentFX

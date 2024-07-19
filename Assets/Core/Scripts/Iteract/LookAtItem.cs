@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LookAtItem : MonoBehaviour, ItemInterface
@@ -70,30 +71,44 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 			transform.rotation = camera.rotation * _lastRotation;
 		}
 
-		if (Input.GetMouseButtonDown(0))
+		if(inventory.canRotate)
 		{
-			isRotating = true;
-			FPL.LockCamera();
-			LockRotate(true);
-		}
+			MouseButtonDown();
+        }
 
-		if (isRotating)
+
+        if (isRotating)
 		{
 			float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
 			float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
 
-			transform.Rotate(Vector3.up, -mouseX, Space.World);
-			transform.Rotate(Vector3.right, mouseY, Space.World);
+			transform.Rotate(Vector3.up, -mouseX, Space.Self);
+			transform.Rotate(Vector3.right, mouseY, Space.Self);
 
 			//transform.position = _lookAtItem.transform.position; 
 			_lastRotation = Quaternion.Inverse(camera.rotation) * transform.rotation;
 		}
 
-		if (Input.GetMouseButtonUp(0))
-		{
-			isRotating = false;
-			FPL.UnLockCamera();
-			LockRotate(false);
-		}
-	}
+		MouseButtonUp();
+    }
+
+	public void MouseButtonDown()
+	{
+        if (Input.GetMouseButtonDown(0))
+        {
+            isRotating = true;
+            FPL.LockCamera();
+            LockRotate(true);
+        }
+    }
+
+	public void MouseButtonUp()
+	{
+        if (Input.GetMouseButtonUp(0))
+        {
+            isRotating = false;
+            FPL.UnLockCamera();
+            LockRotate(false);
+        }
+    }
 }

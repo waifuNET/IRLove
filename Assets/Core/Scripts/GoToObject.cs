@@ -13,7 +13,11 @@ public class GoToObject : MonoBehaviour
 	public bool lockRotation = false;
 	public bool lockPostiton = false;
 
-	void Update()
+    private void Start()
+    {
+		if (target == null) target = GameObject.FindGameObjectWithTag("Target").transform;
+    }
+    void Update()
 	{
 		if (target == null) return;
 
