@@ -10,14 +10,12 @@ public class MainMenu : MonoBehaviour
 	public GameObject mainMenu;
 	public GameObject gameMenu;
 	public FirstPersonLook playerCamera;
-	[HideInInspector] public GameValues gameValues;
 	public List<Image> MENU_COLORS = new List<Image>();
 	[HideInInspector] public List<GameObject> menuObjects = new List<GameObject>();
 
 	private void Start()
 	{
 		if (playerCamera == null) playerCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<FirstPersonLook>();
-		if (gameValues == null) gameValues = GameObject.FindGameObjectWithTag("Player")?.GetComponent<GameValues>();
 	}
 	public void Resume()
 	{
@@ -43,7 +41,7 @@ public class MainMenu : MonoBehaviour
 
 	public void SetMenuColor()
 	{
-		float normalizedValue = Mathf.InverseLerp(100, -100, gameValues.Sainty);
+		float normalizedValue = Mathf.InverseLerp(100, -100, GameValues.Sainty);
 		Color newColor = Color.Lerp(Color.white, Color.red, normalizedValue);
 		for (int i = 0; i < MENU_COLORS.Count; i++)
 		{
