@@ -24,6 +24,16 @@ public class FirstPersonMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
     }
 
+    public void LockMovement()
+    {
+        canWalk = false;
+    }
+
+    public void UnLockMovement()
+    {
+        canWalk = true;
+    }
+
     void FixedUpdate()
     {
         // Update IsRunning from input.

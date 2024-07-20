@@ -30,7 +30,7 @@ public class PlayerInventory : MonoBehaviour
     [HideInInspector] public bool itemDropped = false;
     Vector3 tempPos;
     public float putDistance;
-    public float maxDistance = 1.8f;
+    public float maxDistance = GameValues.PlayerInteractLenght;
 
     public float rotationIndex = 18f;
     public LayerMask ignoreLayer;

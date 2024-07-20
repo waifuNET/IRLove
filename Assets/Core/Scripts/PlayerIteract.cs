@@ -15,7 +15,7 @@ public class PlayerIteract : MonoBehaviour
 
 	public GameObject IterctObj;
 
-	private float closestDistance = 1.5f;
+	private float closestDistance = GameValues.PlayerInteractLenght;
 
 	public void Update()
 	{

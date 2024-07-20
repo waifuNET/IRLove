@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameValues : MonoBehaviour
 {
-	[Range(-100, 100)]
-	public float Sainty = 0;
+	public static float Sainty = 0;
+	public static float PlayerInteractLenght = 1.8f;
 }

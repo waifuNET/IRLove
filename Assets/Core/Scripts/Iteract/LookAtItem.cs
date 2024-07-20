@@ -12,7 +12,9 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 	private GameObject _lookAtItem;
 	private PlayerInventory inventory;
 	private FirstPersonLook FPL;
+	private FirstPersonMovement FPM;
 	private Quaternion _lastRotation;
+	private Quaternion _firstRotation;
 	private GoToObject gotoObject;
 
 	public float rotationSpeed = 100.0f;
@@ -22,7 +24,8 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 	{
 		status = false;
 		texture.SetActive(false);
-		if (FPL != null) FPL.UnLockCamera();
+		if (FPL != null && FPM != null) { FPL.UnLockCamera(); FPM.UnLockMovement(); }
+		_lastRotation = _firstRotation;
 	}
 
 	public bool GetStatus()
@@ -39,7 +42,7 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 	{
 		status = true;
 		texture.SetActive(true);
-		if (FPL != null) FPL.UnLockCamera();
+		if (FPL != null && FPM != null) { FPL.UnLockCamera(); FPM.UnLockMovement(); }
 	}
 
 	private void Start()
@@ -50,10 +53,12 @@ public class LookAtItem : MonoBehaviour, ItemInterface
 			camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 			inventory = player.GetComponent<PlayerInventory>();
 			FPL = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
+			FPM = GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonMovement>();
 			_lookAtItem = GameObject.Find("LookAtItem");
 			gotoObject = gameObject.GetComponent<GoToObject>();
 		}
 		_lastRotation = transform.rotation;
+		_firstRotation = transform.rotation;
 	}
 
 	private void LockRotate(bool state)
@@ -98,6 +103,7 @@ public class LookAtItem : MonoBehaviour, ItemInterface
         {
             isRotating = true;
             FPL.LockCamera();
+			FPM.LockMovement();
             LockRotate(true);
         }
     }
@@ -108,7 +114,8 @@ public class LookAtItem : MonoBehaviour, ItemInterface
         {
             isRotating = false;
             FPL.UnLockCamera();
-            LockRotate(false);
+			FPM.UnLockMovement();
+			LockRotate(false);
         }
     }
 }
