@@ -8,16 +8,34 @@ public class PadLock : MonoBehaviour
     private FirstPersonLook FPL;
     private FirstPersonMovement FPM;
     public GameObject PadLockTexture;
+    public GameObject PadLockPickUP;
+
+    private Vector3 pickUpPos;
 
     public List<GameObject> wheels = new List<GameObject>();
+    public List<GameObject> pickupwheels = new List<GameObject>();
 
-    private int currentWheelPos = 0;
-    private float anglerRotate;
+    private int currentWheelNum = 0;
+    private float anglerRotate = 36;
+
+    private Password _password;
+
+    public int[] activeNumbers = {0,0,0,0};
     // Start is called before the first frame update
     void Start()
     {
         FPL = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
         FPM = GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonMovement>();
+        DetectPickUPPos();
+
+        foreach (GameObject r in pickupwheels)
+        {
+            r.transform.Rotate(-36, 0, 0, Space.Self);
+        }
+        foreach (GameObject r in wheels)
+        {
+            r.transform.Rotate(36, 0, 0, Space.Self);
+        }
     }
 
     // Update is called once per frame
@@ -29,25 +47,32 @@ public class PadLock : MonoBehaviour
             FPM.LockMovement();
             ChangeCodeWheel();
             RotateCodeWheel();
+            DetectPickUPPos();
+            _password.CorrectPassword();
         }
-        
-
+        if(!PadLockTexture.activeSelf)
+        {
+            PadLockPickUP.transform.position = pickUpPos;
+        }
     }
-
+    private void DetectPickUPPos()
+    {
+        pickUpPos = PadLockPickUP.transform.position;
+    }    
     private void ChangeCodeWheel()
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            currentWheelPos++;
+            currentWheelNum++;
 
-            if (currentWheelPos > 3) currentWheelPos = 0;
+            if (currentWheelNum > 3) currentWheelNum = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            currentWheelPos++;
+            currentWheelNum--;
 
-            if (currentWheelPos > 0) currentWheelPos = 3;
+            if (currentWheelNum < 0) currentWheelNum = 3;
         }
     }
 
@@ -55,12 +80,18 @@ public class PadLock : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.W))
         {
-            wheels[currentWheelPos].transform.Rotate(-anglerRotate, 0, 0, Space.Self);
+            wheels[currentWheelNum].transform.Rotate(-anglerRotate, 0, 0, Space.Self);
+            pickupwheels[currentWheelNum].transform.Rotate(-anglerRotate, 0, 0, Space.Self);
+            activeNumbers[currentWheelNum]++;
+            if(activeNumbers[currentWheelNum] > 9) activeNumbers[currentWheelNum] = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            wheels[currentWheelPos].transform.Rotate(anglerRotate, 0, 0, Space.Self);
+            wheels[currentWheelNum].transform.Rotate(anglerRotate, 0, 0, Space.Self);
+            pickupwheels[currentWheelNum].transform.Rotate(anglerRotate, 0, 0, Space.Self);
+            activeNumbers[currentWheelNum]--;
+            if(activeNumbers[currentWheelNum] < 0) activeNumbers[currentWheelNum] = 9;
         }
     }
 }
