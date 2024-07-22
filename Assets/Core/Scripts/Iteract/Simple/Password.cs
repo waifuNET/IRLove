@@ -7,7 +7,7 @@ public class Password : MonoBehaviour
 {
     private PadLock _padLock;
 
-    public int[] password = { 0, 0, 0, 0 };
+    public int[] password = { 1, 0, 3, 5 };
 
     // Start is called before the first frame update
     void Awake()
@@ -19,6 +19,7 @@ public class Password : MonoBehaviour
     {
         if(_padLock.activeNumbers.SequenceEqual(password))
         {
+            Debug.Log("CorrectPassword!");
             _padLock.PadLockPickUP.SetActive(false);
             _padLock.PadLockTexture.SetActive(false);
         }

@@ -24,6 +24,7 @@ public class PadLock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _password = FindFirstObjectByType<Password>();
         FPL = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
         FPM = GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonMovement>();
         DetectPickUPPos();
@@ -48,7 +49,6 @@ public class PadLock : MonoBehaviour
             ChangeCodeWheel();
             RotateCodeWheel();
             DetectPickUPPos();
-            _password.CorrectPassword();
         }
         if(!PadLockTexture.activeSelf)
         {
@@ -84,6 +84,7 @@ public class PadLock : MonoBehaviour
             pickupwheels[currentWheelNum].transform.Rotate(-anglerRotate, 0, 0, Space.Self);
             activeNumbers[currentWheelNum]++;
             if(activeNumbers[currentWheelNum] > 9) activeNumbers[currentWheelNum] = 0;
+            _password.CorrectPassword();
         }
 
         if (Input.GetKeyDown(KeyCode.S))
@@ -92,6 +93,7 @@ public class PadLock : MonoBehaviour
             pickupwheels[currentWheelNum].transform.Rotate(anglerRotate, 0, 0, Space.Self);
             activeNumbers[currentWheelNum]--;
             if(activeNumbers[currentWheelNum] < 0) activeNumbers[currentWheelNum] = 9;
+            _password.CorrectPassword();
         }
     }
 }
