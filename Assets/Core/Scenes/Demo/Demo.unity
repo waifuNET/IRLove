@@ -717,7 +717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkTime: 0.5
-  currentWheel: {fileID: 0}
+  isSelect: 0
 --- !u!1001 &179563639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -978,6 +978,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1011975742}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &286675404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286675398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a7ef67290d5394d8a875c690a482c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkTime: 0.5
+  isSelect: 0
 --- !u!1001 &304424340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1330,6 +1344,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1011975742}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &405942350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405942344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a7ef67290d5394d8a875c690a482c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkTime: 0.5
+  isSelect: 0
 --- !u!1 &406494143
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,7 +1589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkTime: 0.5
-  currentWheel: {fileID: 0}
+  isSelect: 0
 --- !u!1 &613212715
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,6 +2234,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1011975742}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &822937628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822937622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a7ef67290d5394d8a875c690a482c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkTime: 0.5
+  isSelect: 0
 --- !u!1001 &831305362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3033,7 +3075,23 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1199038868352030819, guid: 852a11fecc1877149be52139ea40a3be,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1903541155}
+    - targetCorrespondingSourceObject: {fileID: 7204087337769602194, guid: 852a11fecc1877149be52139ea40a3be,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 405942350}
+    - targetCorrespondingSourceObject: {fileID: 5672145452768627774, guid: 852a11fecc1877149be52139ea40a3be,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 286675404}
+    - targetCorrespondingSourceObject: {fileID: 8195010200551642025, guid: 852a11fecc1877149be52139ea40a3be,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 822937628}
   m_SourcePrefab: {fileID: 100100000, guid: 852a11fecc1877149be52139ea40a3be, type: 3}
 --- !u!1 &1030210236
 GameObject:
@@ -3549,7 +3607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkTime: 0.5
-  currentWheel: {fileID: 0}
+  isSelect: 0
 --- !u!1 &1226320052
 GameObject:
   m_ObjectHideFlags: 0
@@ -5959,6 +6017,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1011975742}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1903541155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903541149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a7ef67290d5394d8a875c690a482c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkTime: 0.5
+  isSelect: 0
 --- !u!1001 &1933147990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6904,7 +6976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkTime: 0.5
-  currentWheel: {fileID: 0}
+  isSelect: 0
 --- !u!1001 &779875267777562948
 PrefabInstance:
   m_ObjectHideFlags: 0
