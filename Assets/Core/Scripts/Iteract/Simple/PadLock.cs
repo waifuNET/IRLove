@@ -80,14 +80,14 @@ public class PadLock : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.W))
         {
-            MoveWheel(-1);
+            MoveWheel(-1); // i = -1 for W
             if (activeNumbers[currentWheelNum] > 9) activeNumbers[currentWheelNum] = 0;
             _password.CorrectPassword();
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            MoveWheel(1);
+            MoveWheel(1); // i=1 for S
             if (activeNumbers[currentWheelNum] < 0) activeNumbers[currentWheelNum] = 9;
             _password.CorrectPassword();
         }
@@ -98,7 +98,6 @@ public class PadLock : MonoBehaviour
         wheels[currentWheelNum].transform.Rotate(i*anglerRotate, 0, 0, Space.Self);
         pickupwheels[currentWheelNum].transform.Rotate(i*anglerRotate, 0, 0, Space.Self);
         if(i > 0) activeNumbers[currentWheelNum]--;
-        else activeNumbers[currentWheelNum]++;
-
+        if(i < 0) activeNumbers[currentWheelNum]++;
     }
 }
