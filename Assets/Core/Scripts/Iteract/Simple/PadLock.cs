@@ -21,7 +21,13 @@ public class PadLock : MonoBehaviour
     private Password _password;
 
     public int[] activeNumbers = {0,0,0,0};
+
+    private PadLockGlow _padLockGlow;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        _padLockGlow = FindFirstObjectByType<PadLockGlow>();
+    }
     void Start()
     {
         _password = FindFirstObjectByType<Password>();
@@ -74,6 +80,21 @@ public class PadLock : MonoBehaviour
 
             if (currentWheelNum < 0) currentWheelNum = 3;
         }
+
+        for(int i  = 0; i<wheels.Count; i ++)
+        {
+            if(i == currentWheelNum)
+            {
+                wheels[i].GetComponent<PadLockGlow>().isSelect = true;
+                wheels[i].GetComponent<PadLockGlow>().PadLockGlowing();
+            }
+            else
+            {
+                wheels[i].GetComponent<PadLockGlow>().isSelect = false;
+                wheels[i].GetComponent<PadLockGlow>().PadLockGlowing();
+            }
+            
+        }
     }
 
     private void RotateCodeWheel()
@@ -87,7 +108,7 @@ public class PadLock : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            MoveWheel(1); // i=1 for S
+            MoveWheel(1); // i = 1 for S
             if (activeNumbers[currentWheelNum] < 0) activeNumbers[currentWheelNum] = 9;
             _password.CorrectPassword();
         }
