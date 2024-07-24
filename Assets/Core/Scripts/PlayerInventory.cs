@@ -85,14 +85,14 @@ public class PlayerInventory : MonoBehaviour
     }
     private void ItemScroll()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && !CurrentItem.Name.ToLower().Equals("padlock")) // forward || mby need to change cuz can be more items with wheel lock
         {
             inventoryItemScrollPosition += 1;
             if (inventoryItemScrollPosition >= inventory.Count) inventoryItemScrollPosition = 0;
 
             ItemSwitch();
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f && !CurrentItem.Name.ToLower().Equals("padlock")) // backwards || mby need to change cuz can be more items with wheel lock
         {
             inventoryItemScrollPosition -= 1;
             if (inventoryItemScrollPosition < 0) inventoryItemScrollPosition = inventory.Count - 1;
