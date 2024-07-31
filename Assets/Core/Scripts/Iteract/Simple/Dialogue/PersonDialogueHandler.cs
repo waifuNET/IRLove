@@ -11,8 +11,14 @@ public class PersonDialogueHandler : MonoBehaviour
     public string[] files;
     int fileIndex = 0;
     public DialogueInit _dialogueInit;
+
+    private void Start()
+    {
+        _dialogueInit = GameObject.FindGameObjectWithTag("DialogueHandler").GetComponent<DialogueInit>();
+    }
     public void GetFiles()
     {
-        _dialogueInit.InitializeDialogueData(files[fileIndex]);
+        List<string> line = _dialogueInit.InitializeDialogueData("Dialogue/DialogueData/test.dlg");
+        _dialogueInit.Decode(line);
     }
 }

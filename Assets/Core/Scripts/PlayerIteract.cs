@@ -9,16 +9,27 @@ public class PlayerIteract : MonoBehaviour
 	public Image PlayerCrosshair;
 	public Sprite defaultCrosshair;
 	public Sprite iteractCrosshair;
-	public Camera cam;
 
 	public LayerMask layerMask;
 
 	public PersonDialogueHandler PDI;
+	public Canvas dialoguePanel;
 
     public GameObject IterctObj;
 
 	private float closestDistance = GameValues.PlayerInteractLenght;
-    
+
+    public FirstPersonLook PlayerCameraComp;
+    public FirstPersonMovement PlayerMovement;
+
+	public GameObject _dialogInit;
+    private void Start()
+    {
+        //NextLine();
+        PlayerCameraComp = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
+        PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonMovement>();
+    }
+
     public void Update()
 	{
 		RaycastHit hit;
@@ -56,7 +67,11 @@ public class PlayerIteract : MonoBehaviour
 
 		if(IterctObj && Input.GetKeyDown(KeyCode.E) && IterctObj.GetComponent<PersonDialogueHandler>() != null)
 		{
-			IterctObj.GetComponent<PersonDialogueHandler>().GetFiles();
+            dialoguePanel.gameObject.SetActive(true);
+			PlayerCameraComp.LockCamera();
+            PlayerMovement.LockMovement();
+            IterctObj.GetComponent<PersonDialogueHandler>().GetFiles();
+			_dialogInit.GetComponent<DialogueInit>().NextLine();
         }
 	}
 }
