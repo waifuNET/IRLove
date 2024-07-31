@@ -106,6 +106,7 @@ public class PlayerInventory : MonoBehaviour
     {
             Gizmos.DrawSphere(tempPos, 0.3f);
     }
+
     //RayCast
     private void ItemRayCast()
     {

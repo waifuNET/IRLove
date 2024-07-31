@@ -13,11 +13,13 @@ public class PlayerIteract : MonoBehaviour
 
 	public LayerMask layerMask;
 
-	public GameObject IterctObj;
+	public PersonDialogueHandler PDI;
+
+    public GameObject IterctObj;
 
 	private float closestDistance = GameValues.PlayerInteractLenght;
-
-	public void Update()
+    
+    public void Update()
 	{
 		RaycastHit hit;
 		if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward), out hit, closestDistance, layerMask))
@@ -33,7 +35,11 @@ public class PlayerIteract : MonoBehaviour
 					PlayerCrosshair.sprite = iteractCrosshair;
 				}
 			}
-		}
+			else if(hit.transform.gameObject.tag == "Dialogue")
+			{
+				IterctObj = hit.transform.gameObject;
+            }
+        }
 		else
 		{
 			Debug.DrawRay(PlayerCamera.transform.position, PlayerCamera.transform.TransformDirection(Vector3.forward) * 1000, Color.white);
@@ -47,5 +53,10 @@ public class PlayerIteract : MonoBehaviour
 		{
 			IterctObj.GetComponent<Iteraction>().Iterction();
 		}
+
+		if(IterctObj && Input.GetKeyDown(KeyCode.E) && IterctObj.GetComponent<PersonDialogueHandler>() != null)
+		{
+			IterctObj.GetComponent<PersonDialogueHandler>().GetFiles();
+        }
 	}
 }
