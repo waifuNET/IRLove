@@ -899,7 +899,7 @@ MonoBehaviour:
   status: 0
   permOpen: 0
   useLocaleCoordinatePosition: 1
-  rotateMode: 0
+  rotateMode: 2
   startPosition: {x: 0, y: 0, z: 0}
   needPosition: {x: 0, y: 0, z: 0.469}
   startRotation: {x: 0, y: 0, z: 0}
@@ -2604,7 +2604,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: a cho s textom))))
+  m_text: 'Nice zmih
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2631,8 +2633,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 93.1
-  m_fontSizeBase: 93.1
+  m_fontSize: 52
+  m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2669,7 +2671,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -840.8218, y: -457.85608, z: -840.8217, w: -457.85608}
+  m_margin: {x: -840.8218, y: -156.89847, z: -840.8217, w: -153.71898}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2692,7 +2694,7 @@ RectTransform:
   m_GameObject: {fileID: 831210953}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2.74, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 309309930}
@@ -4165,7 +4167,7 @@ RectTransform:
   m_GameObject: {fileID: 1223101513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1125913115}
@@ -4232,14 +4234,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 391.86
-  m_fontSizeBase: 391.86
+  m_fontSize: 272.06
+  m_fontSizeBase: 272.06
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4270,7 +4272,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -852.2387, y: -461.9015, z: -843.268, w: -473.7447}
+  m_margin: {x: -794.19366, y: -162.00975, z: -834.29584, w: -167.35573}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5079,6 +5081,8 @@ MonoBehaviour:
   PlayerCamera: {fileID: 0}
   PlayerMovement: {fileID: 0}
   dialoguePanel: {fileID: 277102175}
+  ESCMenu: {fileID: 2030029600}
+  dialogueIsActive: 0
 --- !u!1 &1410204000
 GameObject:
   m_ObjectHideFlags: 0
@@ -6613,6 +6617,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3027669314760598903, guid: c67756923ac93bd4e912f2efe7b06cdb,
+        type: 3}
+      propertyPath: hideCanvas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3027669314760598903, guid: c67756923ac93bd4e912f2efe7b06cdb,
+        type: 3}
+      propertyPath: 'hideCanvas.Array.data[0]'
+      value: 
+      objectReference: {fileID: 277102172}
     - target: {fileID: 5723198604654884808, guid: c67756923ac93bd4e912f2efe7b06cdb,
         type: 3}
       propertyPath: m_Name
@@ -7113,6 +7127,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6822487944907860488, guid: 40583b34958b2664babf40a8e7cbf6e4,
     type: 3}
   m_PrefabInstance: {fileID: 179563639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2030029600 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5830833187408114499, guid: c67756923ac93bd4e912f2efe7b06cdb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1863667299}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2054184153
 PrefabInstance:

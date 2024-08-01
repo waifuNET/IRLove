@@ -68,10 +68,8 @@ public class PlayerIteract : MonoBehaviour
 		if(IterctObj && Input.GetKeyDown(KeyCode.E) && IterctObj.GetComponent<PersonDialogueHandler>() != null)
 		{
             dialoguePanel.gameObject.SetActive(true);
-			PlayerCameraComp.LockCamera();
-            PlayerMovement.LockMovement();
             IterctObj.GetComponent<PersonDialogueHandler>().GetFiles();
-			_dialogInit.GetComponent<DialogueInit>().NextLine();
+			//_dialogInit.GetComponent<DialogueInit>().NextLine();
         }
 	}
 }

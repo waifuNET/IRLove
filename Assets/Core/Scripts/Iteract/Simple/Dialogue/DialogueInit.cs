@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using TMPro;
+using TMPro.EditorUtilities;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueElement
 {
@@ -34,8 +36,11 @@ public class DialogueInit : MonoBehaviour
     public FirstPersonMovement PlayerMovement;
 
     public Canvas dialoguePanel;
+    public GameObject ESCMenu;
 
     int dialogueLineNum = 0;
+
+    public bool dialogueIsActive = false;
 
     List<DialogueElement> elements = new List<DialogueElement>();
 
@@ -48,20 +53,27 @@ public class DialogueInit : MonoBehaviour
 
     private void Update()
     {
-        if(dialoguePanel.isActiveAndEnabled)
+        isActive();
+        if (dialoguePanel.isActiveAndEnabled)
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
                 NextLine();
-                Debug.Log(elements.Count);
             }
+        }
+        if(ESCMenu.activeSelf)
+        {
+            dialoguePanel.gameObject.SetActive(false);
+        }
+        else if(dialogueIsActive)
+        {
+            dialoguePanel.gameObject.SetActive(true);
         }
     }
 
     public List<string> InitializeDialogueData(string file_name)
     {
         string path = Path.Combine(Application.streamingAssetsPath, file_name);
-        Debug.Log(path);
         List<string> lines = new List<string>();
         using (StreamReader sr = new StreamReader(path, Encoding.UTF8))
         {
@@ -81,35 +93,46 @@ public class DialogueInit : MonoBehaviour
     public void Decode(List<string> local)
     {
         List<DialogueElement> dialogueElements = new List<DialogueElement>();
-        DialogueElement dialogueElement = new DialogueElement();
 
         for(int i = 0; i<local.Count;i++)
         {
             if(local[i].Split('#')[1].Contains(":"))
             {
+                DialogueElement dialogueElement = new DialogueElement();
                 dialogueElement.SetName(local[i].Split("#")[1].Split(":")[0].Trim());
                 dialogueElement.SetText(local[i].Split("#")[1].Split(":")[1].Trim());
-                Debug.Log(dialogueElement.GetName());
-                Debug.Log(dialogueElement.GetText());
                 dialogueElements.Add(dialogueElement);
             }
         }
         elements = dialogueElements;
     }
-
-    public void NextLine()
+    public void isActive()
     {
-        Debug.Log(dialogueLineNum);
-        Name.text = elements[dialogueLineNum].GetName();
-        Text.text = elements[dialogueLineNum].GetText();
-        if(elements.Count>= dialogueLineNum)
+        if(dialogueIsActive)
         {
-            dialoguePanel.gameObject.SetActive(false);
+            PlayerCamera.LockCamera();
+            PlayerMovement.LockMovement();
+        }
+        else 
+        {
             PlayerCamera.UnLockCamera();
             PlayerMovement.UnLockMovement();
         }
+    }
+
+    public void NextLine()
+    {
+        dialogueIsActive = true;
+        if (elements.Count == dialogueLineNum)
+        {
+            dialogueIsActive = false;
+            dialoguePanel.gameObject.SetActive(false);
+            
+        }
         else
         {
+            Name.text = elements[dialogueLineNum].GetName();
+            Text.text = elements[dialogueLineNum].GetText();
             dialogueLineNum++;
         }
     }

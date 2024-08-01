@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
 	public bool isMainMenu = false;
 	public GameObject mainMenu;
 	public GameObject gameMenu;
+	public List<GameObject> hideCanvas;
 	public FirstPersonLook playerCamera;
 	public List<Image> MENU_COLORS = new List<Image>();
 	[HideInInspector] public List<GameObject> menuObjects = new List<GameObject>();
@@ -61,7 +62,12 @@ public class MainMenu : MonoBehaviour
 			if(menuObjects.Count == 0)
 			{
 				SetMenuColor();
-
+				/* First method trying to realize this, but i'll try to realize in Dialogue init script
+				for(int i = 0; hideCanvas.Count>i;i++)
+				{
+					hideCanvas[i].SetActive(false);
+				}
+				*/
 				gameMenu.SetActive(true);
 				menuObjects.Add(gameMenu);
 				Time.timeScale = 0f;
@@ -71,7 +77,13 @@ public class MainMenu : MonoBehaviour
 			else
 			{
 				GlobalBack();
-			}
+				/* continue^
+                for (int i = 0; hideCanvas.Count > i; i++)
+                {
+                    hideCanvas[i].SetActive(true);
+                }
+				*/
+            }
 		}
 	}
 
