@@ -113,7 +113,7 @@ public class DialogueInit : MonoBehaviour
             PlayerCamera.LockCamera();
             PlayerMovement.LockMovement();
         }
-        else 
+        else if(!ESCMenu.activeSelf)
         {
             PlayerCamera.UnLockCamera();
             PlayerMovement.UnLockMovement();
