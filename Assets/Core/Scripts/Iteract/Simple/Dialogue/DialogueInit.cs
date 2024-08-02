@@ -36,6 +36,8 @@ public class DialogueInit : MonoBehaviour
     public FirstPersonMovement PlayerMovement;
 
     public Canvas dialoguePanel;
+
+    public GameObject choicePanel;
     public GameObject ESCMenu;
 
     int dialogueLineNum = 0;
@@ -106,6 +108,10 @@ public class DialogueInit : MonoBehaviour
         }
         elements = dialogueElements;
     }
+    public void CreateChoice()
+    {
+
+    }    
     public void isActive()
     {
         if(dialogueIsActive)
@@ -126,7 +132,7 @@ public class DialogueInit : MonoBehaviour
         if (elements.Count == dialogueLineNum)
         {
             dialogueIsActive = false;
-            dialoguePanel.gameObject.SetActive(false);
+            dialoguePanel.enabled = false;
             
         }
         else
