@@ -6357,7 +6357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TakeGameobject: {fileID: 1541037794}
   name: PadLock
-  CanDrop: 1
+  CanDrop: 0
 --- !u!54 &1698298497
 Rigidbody:
   m_ObjectHideFlags: 0

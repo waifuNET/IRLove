@@ -151,8 +151,6 @@ public class PlayerInventory : MonoBehaviour
         if (item == null) return;
         item.Iterction();
     } 
-
-	
     private void ChangeItem(ItemInterface item)
     {
 		if (item == null) return;
@@ -163,10 +161,11 @@ public class PlayerInventory : MonoBehaviour
 		if (item == null) return;
 		item.PickedItem();
 	}
-	private void RemoveItem(Items item)
+	private void RemoveItem(Items item, bool CI_EVENT = true)
 	{
 		if (item == null) return;
-        GetIteract(item.gameObject)?.ChangeItem();
+        if(CI_EVENT)
+            GetIteract(item.gameObject)?.ChangeItem();
         inventoryItemScrollPosition -= 1;
         ItemSwitch();
         inventory.Remove(item);
@@ -274,9 +273,11 @@ public class PlayerInventory : MonoBehaviour
     }
     private void DetectionNewItemPos()
     {
-        if (heldButton && timeButton > heldTime)
+		if (heldButton && timeButton > heldTime)
         {
-            if (!_normalRotation) CurrentItem.OriginalObject.transform.rotation =
+			if (FackeDrop()) return;
+
+			if (!_normalRotation) CurrentItem.OriginalObject.transform.rotation =
                     CurrentItem.OriginalObject.GetComponent<IPickUpInfo>().GetRotation();
             _normalRotation = true;
             if (CurrentItem.gameObject.GetComponent<LookAtItem>() != null)
@@ -377,23 +378,45 @@ public class PlayerInventory : MonoBehaviour
             timeButton += Time.deltaTime;
         }
 
-        if (CurrentItem.gameObject == null || CurrentItem.gameObject.GetComponent<PickUP>() == null || !CurrentItem.gameObject.GetComponent<PickUP>().CanDrop) return;
+        if (CurrentItem.gameObject == null) return;
         else
         {
-            if (Input.GetKeyDown(KeyCode.G))
+
+			if (Input.GetKeyDown(KeyCode.G))
             {
-                canRotate = false;
+				if (FackeDrop()) return;
+
+				canRotate = false;
                 timeButtonStart = true;
                 heldButton = true;
 
             }
             else if (Input.GetKeyUp(KeyCode.G))
             {
-                canRotate = true;
+                if (FackeDrop()) return;
+
+				canRotate = true;
                 PutAndDropItem();
             }
         }
         ItemRayCast();
         DetectionNewItemPos();
     }
+
+    private bool FackeDrop()
+    {
+        if(CurrentItem.OriginalObject != null && CurrentItem.OriginalObject.TryGetComponent<PickUP>(out PickUP pk))
+        {
+            GameObject go = CurrentItem.OriginalObject;
+
+			if (!pk.CanDrop)
+            {
+				RemoveItem(CurrentItem, false);
+				pk.SetOriginalPosition();
+                go.SetActive(true);
+				return true;
+			}
+		}
+		return false;
+	}
 }

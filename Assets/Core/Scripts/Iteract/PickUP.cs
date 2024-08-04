@@ -9,10 +9,12 @@ public class PickUP : MonoBehaviour, Iteraction, IPickUpInfo
 	public GameObject TakeGameobject;
 	public string name;
 	public bool CanDrop = true;
+	private Vector3 originalPosition = Vector3.zero;
 	private void Start()
 	{
 		inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
 		_startedRotation = gameObject.transform.rotation;
+		originalPosition = gameObject.transform.position;
 	}
 	public void Iterction()
 	{
@@ -30,5 +32,15 @@ public class PickUP : MonoBehaviour, Iteraction, IPickUpInfo
 	public Quaternion GetRotation()
 	{
 		return _startedRotation == null ? Quaternion.identity : _startedRotation;
+	}
+
+	public Vector3 GetOriginalPosition()
+	{
+		return originalPosition;
+	}
+
+	public void SetOriginalPosition()
+	{
+		gameObject.transform.position = originalPosition;
 	}
 }
