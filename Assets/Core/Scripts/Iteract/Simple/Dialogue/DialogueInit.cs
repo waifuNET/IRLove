@@ -121,18 +121,21 @@ public class DialogueInit : MonoBehaviour
                 {
                     choices = local[i].Split('?')[1].Split(':').ToList();
                     choicesLine = i;
-                }
+                    dialogueElements.Add(new DialogueElement());
+				}
             }
         }
         elements = dialogueElements;
     }
     public void CreateChoice()
     {
-        for(int i =0;i<choices.Count;i++)
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+		for (int i = 0; i < choices.Count; i++)
         {
-            GameObject go =GameObject.Instantiate(choiceButtonPrefab, choicePanel.transform, false);
+            GameObject go = Instantiate(choiceButtonPrefab, choicePanel.transform, false);
             Debug.Log(choices[i].ToString());
-            go.GetComponentInChildren<Text>().text = choices[i].ToString();
+            go.transform.Find("text").GetComponent<TextMeshProUGUI>().text = choices[i].ToString();
         }
     }    
     public void isActive()
@@ -160,8 +163,10 @@ public class DialogueInit : MonoBehaviour
         {
             dialogueIsActive = false;
             dialoguePanel.enabled = false;
-        }
-        else
+			Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+		}
+		else
         {
             Name.text = elements[dialogueLineNum].GetName();
             Text.text = elements[dialogueLineNum].GetText();

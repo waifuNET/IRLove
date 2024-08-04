@@ -243,13 +243,13 @@ public class PlayerInventory : MonoBehaviour
         {
             Rigidbody rr = origObj.gameObject.AddComponent<Rigidbody>();
             rr.mass = 1;
-            rr.angularDamping = 1.75f;
+            rr.angularDrag = 1.75f;
         }
         Rigidbody rb = origObj.GetComponent<Rigidbody>();
         rb.mass = 1;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.constraints = RigidbodyConstraints.None;
-        rb.angularDamping = 1.75f;
+        rb.angularDrag = 1.75f;
         origObj.transform.position = PlayerCamera.transform.position;
         origObj.SetActive(true);
         rb.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
@@ -267,8 +267,8 @@ public class PlayerInventory : MonoBehaviour
     private void CreateBigWeight()
     {
         Rigidbody rg = CurrentItem.OriginalObject.GetComponent<Rigidbody>();
-    rg.linearVelocity = Vector3.zero;
-        rg.angularDamping = 50;
+        rg.velocity = Vector3.zero;
+        rg.angularDrag = 50;
         rg.constraints = RigidbodyConstraints.None;
         rg.interpolation = RigidbodyInterpolation.Interpolate;
     }
@@ -377,7 +377,7 @@ public class PlayerInventory : MonoBehaviour
             timeButton += Time.deltaTime;
         }
 
-        if (CurrentItem.gameObject == null) return;
+        if (CurrentItem.gameObject == null || CurrentItem.gameObject.GetComponent<PickUP>() == null || !CurrentItem.gameObject.GetComponent<PickUP>().CanDrop) return;
         else
         {
             if (Input.GetKeyDown(KeyCode.G))

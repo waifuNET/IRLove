@@ -8,6 +8,7 @@ public class PickUP : MonoBehaviour, Iteraction, IPickUpInfo
 	private PlayerInventory inventory;
 	public GameObject TakeGameobject;
 	public string name;
+	public bool CanDrop = true;
 	private void Start()
 	{
 		inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
