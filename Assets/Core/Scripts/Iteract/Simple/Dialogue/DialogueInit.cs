@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using TMPro;
 using TMPro.EditorUtilities;
@@ -39,16 +40,21 @@ public class DialogueInit : MonoBehaviour
 
     public GameObject choicePanel;
     public GameObject ESCMenu;
+    public GameObject choiceButtonPrefab;
 
     int dialogueLineNum = 0;
+    public int choicesLine;
+
 
     public bool dialogueIsActive = false;
+
+    public List<string> choices = new List<string>(); //remove from here add in method
+
 
     List<DialogueElement> elements = new List<DialogueElement>();
 
     private void Start()
     {
-        //NextLine();
         PlayerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonMovement>();
     }
@@ -96,21 +102,38 @@ public class DialogueInit : MonoBehaviour
     {
         List<DialogueElement> dialogueElements = new List<DialogueElement>();
 
-        for(int i = 0; i<local.Count;i++)
+
+        for (int i = 0; i<local.Count;i++)
         {
-            if(local[i].Split('#')[1].Contains(":"))
+            if (local[i].Contains('#'))
             {
-                DialogueElement dialogueElement = new DialogueElement();
-                dialogueElement.SetName(local[i].Split("#")[1].Split(":")[0].Trim());
-                dialogueElement.SetText(local[i].Split("#")[1].Split(":")[1].Trim());
-                dialogueElements.Add(dialogueElement);
+                if (local[i].Split('#')[1].Contains(":"))
+                {
+                    DialogueElement dialogueElement = new DialogueElement();
+                    dialogueElement.SetName(local[i].Split("#")[1].Split(":")[0].Trim());
+                    dialogueElement.SetText(local[i].Split("#")[1].Split(":")[1].Trim());
+                    dialogueElements.Add(dialogueElement);
+                }
+            }
+            else if(local[i].Contains('?'))
+            {
+                if (local[i].Split('?')[1].Contains(':'))
+                {
+                    choices = local[i].Split('?')[1].Split(':').ToList();
+                    choicesLine = i;
+                }
             }
         }
         elements = dialogueElements;
     }
     public void CreateChoice()
     {
-
+        for(int i =0;i<choices.Count;i++)
+        {
+            GameObject go =GameObject.Instantiate(choiceButtonPrefab, choicePanel.transform, false);
+            Debug.Log(choices[i].ToString());
+            go.GetComponentInChildren<Text>().text = choices[i].ToString();
+        }
     }    
     public void isActive()
     {
@@ -129,11 +152,14 @@ public class DialogueInit : MonoBehaviour
     public void NextLine()
     {
         dialogueIsActive = true;
+        if(dialogueLineNum == choicesLine)
+        {
+            CreateChoice();
+        }
         if (elements.Count == dialogueLineNum)
         {
             dialogueIsActive = false;
             dialoguePanel.enabled = false;
-            
         }
         else
         {
