@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
 	public GameObject gameMenu;
 	public List<GameObject> hideCanvas;
 	public FirstPersonLook playerCamera;
+	public bool canOpenMenu;
 	public List<Image> MENU_COLORS = new List<Image>();
 	[HideInInspector] public List<GameObject> menuObjects = new List<GameObject>();
 
@@ -57,7 +58,7 @@ public class MainMenu : MonoBehaviour
 	{
 		if (isMainMenu) return;
 
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape)&&canOpenMenu)
 		{
 			if(menuObjects.Count == 0)
 			{

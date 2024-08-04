@@ -35,6 +35,7 @@ public class DialogueInit : MonoBehaviour
 
     public FirstPersonLook PlayerCamera;
     public FirstPersonMovement PlayerMovement;
+    public MainMenu mm;
 
     public Canvas dialoguePanel;
 
@@ -61,7 +62,14 @@ public class DialogueInit : MonoBehaviour
 
     private void Update()
     {
-        isActive();
+        if (dialogueIsActive)
+        {
+            BlockMenu();
+        }
+        else
+        {
+            UnblockMenu();
+        }
         if (dialoguePanel.isActiveAndEnabled)
         {
             if(Input.GetKeyDown(KeyCode.E))
@@ -96,6 +104,16 @@ public class DialogueInit : MonoBehaviour
             }
         }
         return lines;
+    }
+
+    public void BlockMenu()
+    {
+        mm.canOpenMenu = false;
+    }
+
+    public void UnblockMenu()
+    {
+        mm.canOpenMenu = true;
     }
 
     public void Decode(List<string> local)
@@ -145,7 +163,7 @@ public class DialogueInit : MonoBehaviour
             PlayerCamera.LockCamera();
             PlayerMovement.LockMovement();
         }
-        else if(!ESCMenu.activeSelf)
+        if(!dialogueIsActive)
         {
             PlayerCamera.UnLockCamera();
             PlayerMovement.UnLockMovement();
@@ -155,18 +173,20 @@ public class DialogueInit : MonoBehaviour
     public void NextLine()
     {
         dialogueIsActive = true;
-        if(dialogueLineNum == choicesLine)
+        isActive();
+        if (dialogueLineNum == choicesLine)
         {
             CreateChoice();
         }
         if (elements.Count == dialogueLineNum)
         {
             dialogueIsActive = false;
+            isActive();
             dialoguePanel.enabled = false;
 			Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-		}
-		else
+        }
+        else
         {
             Name.text = elements[dialogueLineNum].GetName();
             Text.text = elements[dialogueLineNum].GetText();

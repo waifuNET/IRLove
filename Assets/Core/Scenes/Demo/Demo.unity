@@ -855,6 +855,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 179563639}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &192554656 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3027669314760598903, guid: c67756923ac93bd4e912f2efe7b06cdb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1863667299}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99f05d03800441b4c97c75e8bc50b39e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &197951691 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6728505177816131098, guid: abb698fc6c933cb459582e203c2bbecb,
@@ -2394,6 +2406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e8c1a386b1a3e47a16cb2933135f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemClass: 0
   TakeGameobject: {fileID: 417415083}
   name: DemoLook
   CanDrop: 1
@@ -3659,6 +3672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e8c1a386b1a3e47a16cb2933135f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemClass: 0
   TakeGameobject: {fileID: 44924507}
   name: TestCube
   CanDrop: 1
@@ -4835,6 +4849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e8c1a386b1a3e47a16cb2933135f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemClass: 0
   TakeGameobject: {fileID: 1522673233}
   name: test
   CanDrop: 1
@@ -5163,6 +5178,7 @@ MonoBehaviour:
   Text: {fileID: 831210954}
   PlayerCamera: {fileID: 0}
   PlayerMovement: {fileID: 0}
+  mm: {fileID: 192554656}
   dialoguePanel: {fileID: 277102175}
   choicePanel: {fileID: 1158459650}
   ESCMenu: {fileID: 2030029600}
@@ -6355,6 +6371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e8c1a386b1a3e47a16cb2933135f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemClass: 0
   TakeGameobject: {fileID: 1541037794}
   name: PadLock
   CanDrop: 0
@@ -6471,6 +6488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e8c1a386b1a3e47a16cb2933135f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemClass: 0
   TakeGameobject: {fileID: 5560905290433948737}
   name: Phone
   CanDrop: 1
@@ -7404,6 +7422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e8c1a386b1a3e47a16cb2933135f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemClass: 0
   TakeGameobject: {fileID: 1202220305}
   name: Laptop
   CanDrop: 1

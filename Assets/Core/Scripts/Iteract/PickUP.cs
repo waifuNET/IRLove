@@ -5,6 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PickUP : MonoBehaviour, Iteraction, IPickUpInfo
 {
+	public enum EItemClass
+	{
+		handedItem,
+		inventoryItem
+	}
+
+	public EItemClass itemClass;
 	private PlayerInventory inventory;
 	public GameObject TakeGameobject;
 	public string name;
@@ -16,15 +23,23 @@ public class PickUP : MonoBehaviour, Iteraction, IPickUpInfo
 		_startedRotation = gameObject.transform.rotation;
 		originalPosition = gameObject.transform.position;
 	}
+	
 	public void Iterction()
 	{
-		if (!inventory.heldButton && inventory.inventory.Count < 5)
+		if(itemClass == (EItemClass)1)
 		{
-			inventory.inventory.Add(new Items() { Name = name, gameObject = TakeGameobject, OriginalObject = gameObject });
-            inventory.inventoryItemScrollPosition = inventory.inventory.Count - 1;
-            inventory.ItemSwitch();
-			inventory.SetDictNewRotation();
-            gameObject.SetActive(false);
+            if (!inventory.heldButton && inventory.inventory.Count < 5)
+            {
+                inventory.inventory.Add(new Items() { Name = name, gameObject = TakeGameobject, OriginalObject = gameObject });
+                inventory.inventoryItemScrollPosition = inventory.inventory.Count - 1;
+                inventory.ItemSwitch();
+                inventory.SetDictNewRotation();
+                gameObject.SetActive(false);
+            }
+        }
+		else if(itemClass == (EItemClass)0)
+		{
+
 		}
 	}
 
