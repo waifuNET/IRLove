@@ -148,6 +148,8 @@ GameObject:
   - component: {fileID: 5399960387938362025}
   - component: {fileID: 5057120724531496953}
   - component: {fileID: 2149277744705607617}
+  - component: {fileID: -5772376618957019837}
+  - component: {fileID: -2087806050132212213}
   m_Layer: 5
   m_Name: ChoiseButton
   m_TagString: Untagged
@@ -257,3 +259,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-5772376618957019837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9205888196814793042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e36e7c121077a47bd89292bb49a849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  files: []
+  _dialogueInit: {fileID: 0}
+--- !u!114 &-2087806050132212213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9205888196814793042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8174373ff77bb3448a941c5285e02b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonNumber: 0

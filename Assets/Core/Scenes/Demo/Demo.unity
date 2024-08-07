@@ -5179,6 +5179,7 @@ MonoBehaviour:
   PlayerCamera: {fileID: 0}
   PlayerMovement: {fileID: 0}
   mm: {fileID: 192554656}
+  bn: {fileID: 0}
   dialoguePanel: {fileID: 277102175}
   choicePanel: {fileID: 1158459650}
   ESCMenu: {fileID: 2030029600}
@@ -5187,6 +5188,7 @@ MonoBehaviour:
   choicesLine: 0
   dialogueIsActive: 0
   choices: []
+  choicesFileName: []
 --- !u!1 &1410204000
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -18,7 +19,13 @@ public class PersonDialogueHandler : MonoBehaviour
     }
     public void GetFiles()
     {
-        List<string> line = _dialogueInit.InitializeDialogueData("Dialogue/DialogueData/test.dlg");
+        if(fileIndex>files.Length-1)
+        {
+            fileIndex = 0;
+        }
+        List<string> line = _dialogueInit.InitializeDialogueData("Dialogue/DialogueData/" + files[fileIndex] +".dlg");
+        fileIndex++;
         _dialogueInit.Decode(line);
+        Debug.Log(line);
     }
 }

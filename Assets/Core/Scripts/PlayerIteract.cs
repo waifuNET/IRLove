@@ -70,6 +70,7 @@ public class PlayerIteract : MonoBehaviour
             dialoguePanel.gameObject.SetActive(true);
             IterctObj.GetComponent<PersonDialogueHandler>().GetFiles();
 			//_dialogInit.GetComponent<DialogueInit>().NextLine();
+			
         }
 	}
 }

@@ -27,6 +27,11 @@ public class DialogueElement
     public string GetName() { return name;}
     public string GetText() { return text;}
 }
+/* TO DO: 1.We have to fix Decoding every time when pressing E key, added new bool param to
+ *          detect dialogue beginnig. 
+ *        2.Have to change system of detecting activating buttonchoces. 
+ *        3.Making visual bug fixed activating and disabling text and name menu.
+ */
 
 public class DialogueInit : MonoBehaviour
 {
@@ -36,6 +41,7 @@ public class DialogueInit : MonoBehaviour
     public FirstPersonLook PlayerCamera;
     public FirstPersonMovement PlayerMovement;
     public MainMenu mm;
+    public ButtonNumber bn;
 
     public Canvas dialoguePanel;
 
@@ -46,13 +52,14 @@ public class DialogueInit : MonoBehaviour
     int dialogueLineNum = 0;
     public int choicesLine;
 
-
+    bool isCreate = false;
     public bool dialogueIsActive = false;
 
-    public List<string> choices = new List<string>(); //remove from here add in method
+    public List<string> choices = new List<string>();
+    public List<string> choicesFileName = new List<string>();
 
-
-    List<DialogueElement> elements = new List<DialogueElement>();
+    public List<DialogueElement> dialogueElements = new List<DialogueElement>();
+    public List<DialogueElement> elements = new List<DialogueElement>();
 
     private void Start()
     {
@@ -77,6 +84,7 @@ public class DialogueInit : MonoBehaviour
                 NextLine();
             }
         }
+        
         if(ESCMenu.activeSelf)
         {
             dialoguePanel.gameObject.SetActive(false);
@@ -118,8 +126,6 @@ public class DialogueInit : MonoBehaviour
 
     public void Decode(List<string> local)
     {
-        List<DialogueElement> dialogueElements = new List<DialogueElement>();
-
 
         for (int i = 0; i<local.Count;i++)
         {
@@ -141,9 +147,18 @@ public class DialogueInit : MonoBehaviour
                     choicesLine = i;
                     dialogueElements.Add(new DialogueElement());
 				}
+                if(local[i].Split('?')[1].Contains('>'))
+                {
+                    choicesFileName = local[i].Split('?')[1].Split('>').ToList();
+                }
             }
         }
         elements = dialogueElements;
+        for(int i = 0 ; elements.Count > i ; i++)
+        {
+            Debug.Log(elements[i].GetName());
+            Debug.Log(elements[i].GetText());
+        }
     }
     public void CreateChoice()
     {
@@ -152,10 +167,11 @@ public class DialogueInit : MonoBehaviour
 		for (int i = 0; i < choices.Count; i++)
         {
             GameObject go = Instantiate(choiceButtonPrefab, choicePanel.transform, false);
-            Debug.Log(choices[i].ToString());
+            bn = go.GetComponent<ButtonNumber>();
             go.transform.Find("text").GetComponent<TextMeshProUGUI>().text = choices[i].ToString();
         }
-    }    
+    }  
+
     public void isActive()
     {
         if(dialogueIsActive)
