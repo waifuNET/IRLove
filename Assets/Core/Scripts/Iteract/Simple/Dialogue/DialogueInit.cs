@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,8 +27,8 @@ public class DialogueElement
     public string GetName() { return name;}
     public string GetText() { return text;}
 }
-/* TO DO: 1.We have to fix Decoding every time when pressing E key, added new bool param to
- *          detect dialogue beginnig. 
+/* TO DO: ✓ 1.We have to fix Decoding every time when pressing E key, added new bool param to
+ *          detect dialogue beginnig. ✓
  *        2.Have to change system of detecting activating buttonchoces. 
  *        3.Making visual bug fixed activating and disabling text and name menu.
  */
@@ -49,11 +49,15 @@ public class DialogueInit : MonoBehaviour
     public GameObject ESCMenu;
     public GameObject choiceButtonPrefab;
 
-    int dialogueLineNum = 0;
+    public int dialogueLineNum = 0;
     public int choicesLine;
 
     bool isCreate = false;
     public bool dialogueIsActive = false;
+
+    public PersonDialogueHandler PDH;
+
+    public List<PersonDialogueHandler> PDHScan = new List<PersonDialogueHandler>();
 
     public List<string> choices = new List<string>();
     public List<string> choicesFileName = new List<string>();
@@ -65,47 +69,65 @@ public class DialogueInit : MonoBehaviour
     {
         PlayerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonMovement>();
+        PDHScan = FindObjectsByType<PersonDialogueHandler>(sortMode: FindObjectsSortMode.InstanceID).ToList();
+        for(int i = 0; i < PDHScan.Count; i++)
+        {
+            PDHScan[i].decodedDialogue = Decode(PDHScan[i].GetFiles(PDHScan[i].files));
+            if(choicesFileName != null)
+            {
+                PDHScan[i].choicesFiles = choicesFileName;
+                for(int j = 0; j < PDHScan[i].choicesFiles.Count-1; j++)
+                {
+                    PDHScan[i].choicesFileLines.Add(PDHScan[i].GetFiles(PDHScan[i].choicesFiles));
+                }
+            }
+        }
     }
 
     private void Update()
     {
-        if (dialogueIsActive)
+        if(PDH!=null)
         {
-            BlockMenu();
+            if (PDH.IsActive())
+            {
+                BlockMenu();
+            }
+            else
+            {
+                UnblockMenu();
+            }
         }
-        else
-        {
-            UnblockMenu();
-        }
+        
         if (dialoguePanel.isActiveAndEnabled)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.E) )
             {
                 NextLine();
             }
         }
-        
-        if(ESCMenu.activeSelf)
-        {
-            dialoguePanel.gameObject.SetActive(false);
-        }
-        else if(dialogueIsActive)
-        {
-            dialoguePanel.gameObject.SetActive(true);
-        }
+    }
+
+    public void BlockMenu()
+    {
+        mm.canOpenMenu = false;
+    }
+    public void UnblockMenu()
+    {
+        mm.canOpenMenu = true;
     }
 
     public List<string> InitializeDialogueData(string file_name)
     {
         string path = Path.Combine(Application.streamingAssetsPath, file_name);
         List<string> lines = new List<string>();
+
         using (StreamReader sr = new StreamReader(path, Encoding.UTF8))
         {
             string line = string.Empty;
-            while((line = sr.ReadLine()) != null)
+            while ((line = sr.ReadLine()) != null)
             {
                 line = line.Trim();
-                if(line!="")
+                if (line != "")
                 {
                     lines.Add(line);
                 }
@@ -113,18 +135,7 @@ public class DialogueInit : MonoBehaviour
         }
         return lines;
     }
-
-    public void BlockMenu()
-    {
-        mm.canOpenMenu = false;
-    }
-
-    public void UnblockMenu()
-    {
-        mm.canOpenMenu = true;
-    }
-
-    public void Decode(List<string> local)
+    public List<DialogueElement> Decode(List<string> local)
     {
 
         for (int i = 0; i<local.Count;i++)
@@ -149,16 +160,11 @@ public class DialogueInit : MonoBehaviour
 				}
                 if(local[i].Split('?')[1].Contains('>'))
                 {
-                    choicesFileName = local[i].Split('?')[1].Split('>').ToList();
+                     choicesFileName = local[i].Split('?')[1].Split('>').ToList();
                 }
             }
         }
-        elements = dialogueElements;
-        for(int i = 0 ; elements.Count > i ; i++)
-        {
-            Debug.Log(elements[i].GetName());
-            Debug.Log(elements[i].GetText());
-        }
+        return elements = dialogueElements;
     }
     public void CreateChoice()
     {
@@ -174,12 +180,12 @@ public class DialogueInit : MonoBehaviour
 
     public void isActive()
     {
-        if(dialogueIsActive)
+        if(PDH.IsActive())
         {
             PlayerCamera.LockCamera();
             PlayerMovement.LockMovement();
         }
-        if(!dialogueIsActive)
+        if(!PDH.IsActive())
         {
             PlayerCamera.UnLockCamera();
             PlayerMovement.UnLockMovement();
@@ -193,10 +199,13 @@ public class DialogueInit : MonoBehaviour
         if (dialogueLineNum == choicesLine)
         {
             CreateChoice();
+            
+            dialoguePanel.transform.Find("Name Panel").gameObject.SetActive(false);
+            dialoguePanel.transform.Find("Dialogue Panel").gameObject.SetActive(false);
         }
-        if (elements.Count == dialogueLineNum)
+        if (PDH.decodedDialogue.Count == dialogueLineNum)
         {
-            dialogueIsActive = false;
+            PDH.DeActive();
             isActive();
             dialoguePanel.enabled = false;
 			Cursor.visible = false;

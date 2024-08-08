@@ -7,28 +7,32 @@ using UnityEngine.UI;
 public class ButtonNumber : MonoBehaviour
 {
     public int buttonNumber;
-    DialogueInit di;
-    PersonDialogueHandler PDH;
+    DialogueInit _dialogueInit;
     bool isClicked = false;
 
     public void Start()
     {
-        gameObject.GetComponent<Button>().onClick.AddListener(OnClick);
-        di = GameObject.FindWithTag("DialogueHandler").GetComponent<DialogueInit>();
-        PDH = GetComponent<PersonDialogueHandler>();
+        _dialogueInit = GameObject.FindWithTag("DialogueHandler").GetComponent<DialogueInit>();
     }
     public void Update()
     {
         if(gameObject.activeSelf)
         {
-            PDH.files = di.choicesFileName.ToArray();
+            _dialogueInit.PDH.files = _dialogueInit.choicesFileName;
         }
     }
 
-    void OnClick()
+    public void OnClick()
     {
-        PDH.GetFiles();
+        _dialogueInit.Decode(_dialogueInit.PDH.choicesFileLines[buttonNumber]);
+        Debug.Log(_dialogueInit.PDH.choicesFileLines[buttonNumber]);
+        _dialogueInit.dialoguePanel.transform.Find("Name Panel").gameObject.SetActive(true);
+        _dialogueInit.dialoguePanel.transform.Find("Dialogue Panel").gameObject.SetActive(true);
+        _dialogueInit.PDH.StartDialogue();
+        _dialogueInit.NextLine();
+        //Need to kill all child
     }
+    
 
     public bool IsClicked()
     {

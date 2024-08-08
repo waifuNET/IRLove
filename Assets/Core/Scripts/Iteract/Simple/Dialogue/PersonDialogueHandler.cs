@@ -9,23 +9,47 @@ using UnityEngine.Windows;
 
 public class PersonDialogueHandler : MonoBehaviour
 {
-    public string[] files;
-    int fileIndex = 0;
+    public List<string> files;
+    public List<List<string>> choicesFileLines = new List<List<string>>();
+    public List<string> choicesFiles = new List<string>();
+
+    int localIndex = 0;
+
     public DialogueInit _dialogueInit;
+
+    public List<string> lines = new List<string>();
+    public List<DialogueElement> decodedDialogue = new List<DialogueElement>();
+
+    public bool dialogueStarted = false;
 
     private void Start()
     {
         _dialogueInit = GameObject.FindGameObjectWithTag("DialogueHandler").GetComponent<DialogueInit>();
     }
-    public void GetFiles()
+    public List<string> GetFiles(List<string> local)
     {
-        if(fileIndex>files.Length-1)
+        if(localIndex> local.Count - 1)
         {
-            fileIndex = 0;
+            localIndex = 0;
         }
-        List<string> line = _dialogueInit.InitializeDialogueData("Dialogue/DialogueData/" + files[fileIndex] +".dlg");
-        fileIndex++;
-        _dialogueInit.Decode(line);
-        Debug.Log(line);
+        List<string> lines = _dialogueInit.InitializeDialogueData("Dialogue/DialogueData/" + local[localIndex] + ".dlg");
+        localIndex++;
+        return lines;
+    }
+
+    public void StartDialogue()
+    {
+        _dialogueInit.dialoguePanel.gameObject.SetActive(true);
+        _dialogueInit.PDH = gameObject.GetComponent<PersonDialogueHandler>();
+        dialogueStarted = true;
+    }
+    public bool IsActive()
+    {
+        return dialogueStarted;
+    }
+
+    public void DeActive()
+    {
+        dialogueStarted = false;
     }
 }
