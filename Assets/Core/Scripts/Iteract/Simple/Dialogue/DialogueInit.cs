@@ -52,8 +52,8 @@ public class DialogueInit : MonoBehaviour
     public int dialogueLineNum = 0;
     public int choicesLine;
 
-    bool isCreate = false;
     public bool dialogueIsActive = false;
+    public bool choiceIsActive = false;
 
     public PersonDialogueHandler PDH;
 
@@ -100,13 +100,20 @@ public class DialogueInit : MonoBehaviour
         
         if (dialoguePanel.isActiveAndEnabled)
         {
-            if(Input.GetKeyDown(KeyCode.E) )
+            if (!ChoiceIsActive())
             {
-                NextLine();
+                SkipDialogue();
             }
         }
     }
-
+    public void SkipDialogue()
+    {
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
+        {
+            NextLine();
+        }
+    }
+    
     public void BlockMenu()
     {
         mm.canOpenMenu = false;
@@ -168,16 +175,25 @@ public class DialogueInit : MonoBehaviour
     }
     public void CreateChoice()
     {
+        SetChoice(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
 		for (int i = 0; i < choices.Count; i++)
         {
             GameObject go = Instantiate(choiceButtonPrefab, choicePanel.transform, false);
             bn = go.GetComponent<ButtonNumber>();
+            bn.buttonNumber = i;
             go.transform.Find("text").GetComponent<TextMeshProUGUI>().text = choices[i].ToString();
         }
     }  
-
+    public bool ChoiceIsActive()
+    {
+        return choiceIsActive;
+    }
+    public void SetChoice(bool local)
+    {
+        choiceIsActive = local;
+    }
     public void isActive()
     {
         if(PDH.IsActive())

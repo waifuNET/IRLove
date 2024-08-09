@@ -8,29 +8,34 @@ public class ButtonNumber : MonoBehaviour
 {
     public int buttonNumber;
     DialogueInit _dialogueInit;
+    public string fileName;
     bool isClicked = false;
 
     public void Start()
     {
         _dialogueInit = GameObject.FindWithTag("DialogueHandler").GetComponent<DialogueInit>();
     }
-    public void Update()
-    {
-        if(gameObject.activeSelf)
-        {
-            _dialogueInit.PDH.files = _dialogueInit.choicesFileName;
-        }
-    }
 
     public void OnClick()
     {
-        _dialogueInit.Decode(_dialogueInit.PDH.choicesFileLines[buttonNumber]);
-        Debug.Log(_dialogueInit.PDH.choicesFileLines[buttonNumber]);
+        //vot tut bag. tut full list peredaet so vsemi slovami v knopku
+        List<DialogueElement> temp = _dialogueInit.Decode(_dialogueInit.PDH.choicesFileLines[buttonNumber]);
+        Debug.Log(temp.Count); 
+        foreach (DialogueElement element in temp)
+        {
+            Debug.Log(element.GetName());
+            Debug.Log(element.GetText());
+            //tut bag ya hz pochemy tol'ko vtoroi element chitaet...
+        }
         _dialogueInit.dialoguePanel.transform.Find("Name Panel").gameObject.SetActive(true);
         _dialogueInit.dialoguePanel.transform.Find("Dialogue Panel").gameObject.SetActive(true);
         _dialogueInit.PDH.StartDialogue();
         _dialogueInit.NextLine();
-        //Need to kill all child
+        _dialogueInit.SetChoice(false);
+        while (_dialogueInit.choicePanel.transform.childCount > 0)
+        {
+            DestroyImmediate(_dialogueInit.choicePanel.transform.GetChild(0).gameObject);
+        }
     }
     
 
