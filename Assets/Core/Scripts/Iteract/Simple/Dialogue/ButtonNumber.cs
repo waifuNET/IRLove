@@ -7,26 +7,25 @@ using UnityEngine.UI;
 public class ButtonNumber : MonoBehaviour
 {
     public int buttonNumber;
+
     DialogueInit _dialogueInit;
-    public string fileName;
+
     bool isClicked = false;
+
+    public List<string> file = new List<string>();
+    public List<DialogueElement> lines = new List<DialogueElement>();
 
     public void Start()
     {
         _dialogueInit = GameObject.FindWithTag("DialogueHandler").GetComponent<DialogueInit>();
+        file = _dialogueInit.PDHScan[buttonNumber].GetFiles(_dialogueInit.PDHScan[buttonNumber].choicesFilesName[buttonNumber]);
     }
 
+    public void Update()
+    {
+    }
     public void OnClick()
     {
-        //vot tut bag. tut full list peredaet so vsemi slovami v knopku
-        List<DialogueElement> temp = _dialogueInit.Decode(_dialogueInit.PDH.choicesFileLines[buttonNumber]);
-        Debug.Log(temp.Count); 
-        foreach (DialogueElement element in temp)
-        {
-            Debug.Log(element.GetName());
-            Debug.Log(element.GetText());
-            //tut bag ya hz pochemy tol'ko vtoroi element chitaet...
-        }
         _dialogueInit.dialoguePanel.transform.Find("Name Panel").gameObject.SetActive(true);
         _dialogueInit.dialoguePanel.transform.Find("Dialogue Panel").gameObject.SetActive(true);
         _dialogueInit.PDH.StartDialogue();

@@ -72,14 +72,14 @@ public class DialogueInit : MonoBehaviour
         PDHScan = FindObjectsByType<PersonDialogueHandler>(sortMode: FindObjectsSortMode.InstanceID).ToList();
         for(int i = 0; i < PDHScan.Count; i++)
         {
+            /*  Need to refract this part and decode with getting gameObject param to track choices files inside
+             *  TO DO: 1. Make Decoding in iteract to give opportunity track choice and loop dialogue without choice
+             *         2. Do tracking param to attract with buttons and decoding file inside theirs code
+             */
             PDHScan[i].decodedDialogue = Decode(PDHScan[i].GetFiles(PDHScan[i].files));
             if(choicesFileName != null)
             {
-                PDHScan[i].choicesFiles = choicesFileName;
-                for(int j = 0; j < PDHScan[i].choicesFiles.Count-1; j++)
-                {
-                    PDHScan[i].choicesFileLines.Add(PDHScan[i].GetFiles(PDHScan[i].choicesFiles));
-                }
+                PDHScan[i].choicesFilesName = choicesFileName;
             }
         }
     }
@@ -144,7 +144,6 @@ public class DialogueInit : MonoBehaviour
     }
     public List<DialogueElement> Decode(List<string> local)
     {
-
         for (int i = 0; i<local.Count;i++)
         {
             if (local[i].Contains('#'))
@@ -165,14 +164,18 @@ public class DialogueInit : MonoBehaviour
                     choicesLine = i;
                     dialogueElements.Add(new DialogueElement());
 				}
-                if(local[i].Split('?')[1].Contains('>'))
+                else if(local[i].Split('?')[1].Contains('>'))
                 {
-                     choicesFileName = local[i].Split('?')[1].Split('>').ToList();
+                    for(int j = 0;j < local[i].Split('?')[1].Split('>').ToList().Count; j++)
+                    {
+                        choicesFileName.Add(local[i].Split('?')[1].Split('>').ToList()[j]);
+                    }
                 }
             }
         }
         return elements = dialogueElements;
     }
+    
     public void CreateChoice()
     {
         SetChoice(true);

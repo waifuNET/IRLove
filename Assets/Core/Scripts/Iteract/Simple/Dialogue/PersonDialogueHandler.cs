@@ -10,8 +10,7 @@ using UnityEngine.Windows;
 public class PersonDialogueHandler : MonoBehaviour
 {
     public List<string> files;
-    public List<List<string>> choicesFileLines = new List<List<string>>();
-    public List<string> choicesFiles = new List<string>();
+    public List<string> choicesFilesName = new List<string>();
 
     int localIndex = 0;
 
@@ -21,7 +20,6 @@ public class PersonDialogueHandler : MonoBehaviour
     public List<DialogueElement> decodedDialogue = new List<DialogueElement>();
 
     public bool dialogueStarted = false;
-
     private void Start()
     {
         _dialogueInit = GameObject.FindGameObjectWithTag("DialogueHandler").GetComponent<DialogueInit>();
@@ -36,7 +34,11 @@ public class PersonDialogueHandler : MonoBehaviour
         localIndex++;
         return lines;
     }
-
+    public List<string> GetFiles(string local)
+    {
+        List<string> lines = _dialogueInit.InitializeDialogueData("Dialogue/DialogueData/" + local + ".dlg");
+        return lines;
+    }
     public void StartDialogue()
     {
         _dialogueInit.dialoguePanel.gameObject.SetActive(true);
