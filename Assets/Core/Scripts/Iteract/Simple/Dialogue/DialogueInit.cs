@@ -48,6 +48,7 @@ public class DialogueInit : MonoBehaviour
     public GameObject choicePanel;
     public GameObject ESCMenu;
     public GameObject choiceButtonPrefab;
+    public GameObject selfGameObject;
 
     public int dialogueLineNum = 0;
     public int choicesLine;
@@ -67,15 +68,12 @@ public class DialogueInit : MonoBehaviour
 
     private void Start()
     {
+        UnblockMenu();
         PlayerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonMovement>();
         PDHScan = FindObjectsByType<PersonDialogueHandler>(sortMode: FindObjectsSortMode.InstanceID).ToList();
         for(int i = 0; i < PDHScan.Count; i++)
         {
-            /*  Need to refract this part and decode with getting gameObject param to track choices files inside
-             *  TO DO: 1. Make Decoding in iteract to give opportunity track choice and loop dialogue without choice
-             *         2. Do tracking param to attract with buttons and decoding file inside theirs code
-             */
             PDHScan[i].decodedDialogue = Decode(PDHScan[i].GetFiles(PDHScan[i].files));
             if(choicesFileName != null)
             {
@@ -98,6 +96,7 @@ public class DialogueInit : MonoBehaviour
             }
         }
         
+
         if (dialoguePanel.isActiveAndEnabled)
         {
             if (!ChoiceIsActive())
@@ -106,6 +105,7 @@ public class DialogueInit : MonoBehaviour
             }
         }
     }
+
     public void SkipDialogue()
     {
         if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))

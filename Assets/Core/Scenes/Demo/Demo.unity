@@ -1910,7 +1910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   files:
   - test
-  choicesFiles: []
+  choicesFilesName: []
   _dialogueInit: {fileID: 0}
   lines: []
   dialogueStarted: 0
@@ -5188,9 +5188,11 @@ MonoBehaviour:
   ESCMenu: {fileID: 2030029600}
   choiceButtonPrefab: {fileID: 9205888196814793042, guid: 687eac4eb0e670840a724d3bf63fd84d,
     type: 3}
+  selfGameObject: {fileID: 0}
   dialogueLineNum: 0
   choicesLine: 0
   dialogueIsActive: 0
+  choiceIsActive: 0
   PDH: {fileID: 0}
   PDHScan: []
   choices: []

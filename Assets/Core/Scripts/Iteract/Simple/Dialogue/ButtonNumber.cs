@@ -9,6 +9,7 @@ public class ButtonNumber : MonoBehaviour
     public int buttonNumber;
 
     DialogueInit _dialogueInit;
+    PersonDialogueHandler PDH;
 
     bool isClicked = false;
 
@@ -18,14 +19,13 @@ public class ButtonNumber : MonoBehaviour
     public void Start()
     {
         _dialogueInit = GameObject.FindWithTag("DialogueHandler").GetComponent<DialogueInit>();
-        file = _dialogueInit.PDHScan[buttonNumber].GetFiles(_dialogueInit.PDHScan[buttonNumber].choicesFilesName[buttonNumber]);
+        PDH = _dialogueInit.selfGameObject.GetComponent<PersonDialogueHandler>();
+        file = PDH.GetFiles(PDH.choicesFilesName[buttonNumber]);
     }
 
-    public void Update()
-    {
-    }
     public void OnClick()
     {
+        _dialogueInit.Decode(file);
         _dialogueInit.dialoguePanel.transform.Find("Name Panel").gameObject.SetActive(true);
         _dialogueInit.dialoguePanel.transform.Find("Dialogue Panel").gameObject.SetActive(true);
         _dialogueInit.PDH.StartDialogue();

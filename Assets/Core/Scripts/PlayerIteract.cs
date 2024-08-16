@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ public class PlayerIteract : MonoBehaviour
 
 	public LayerMask layerMask;
 
-	public PersonDialogueHandler PDI;
+	public PersonDialogueHandler PDH;
 	public Canvas dialoguePanel;
 
     public GameObject IterctObj;
@@ -22,12 +23,12 @@ public class PlayerIteract : MonoBehaviour
     public FirstPersonLook PlayerCameraComp;
     public FirstPersonMovement PlayerMovement;
 
-	public GameObject _dialogInit;
+	public DialogueInit _dialogueInit;
     private void Start()
     {
-        //NextLine();
         PlayerCameraComp = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FirstPersonLook>();
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonMovement>();
+		_dialogueInit = GameObject.FindGameObjectWithTag("DialogueHandler").GetComponent<DialogueInit>();
     }
 
     public void Update()
@@ -67,7 +68,9 @@ public class PlayerIteract : MonoBehaviour
 
 		if(IterctObj && Input.GetKeyDown(KeyCode.E) && IterctObj.GetComponent<PersonDialogueHandler>() != null)
 		{
-			IterctObj.GetComponent<PersonDialogueHandler>().StartDialogue();
+			PDH = IterctObj.GetComponent<PersonDialogueHandler>();
+            PDH.StartDialogue();
+            _dialogueInit.selfGameObject = IterctObj;
         }
 	}
 }
