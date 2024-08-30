@@ -66,6 +66,8 @@ public class PlayerIteract : MonoBehaviour
 			IterctObj.GetComponent<Iteraction>().Iterction();
 		}
 
+		//I miss you <3
+
 		if(IterctObj && Input.GetKeyDown(KeyCode.E) && IterctObj.GetComponent<PersonDialogueHandler>() != null)
 		{
 			PDH = IterctObj.GetComponent<PersonDialogueHandler>();
