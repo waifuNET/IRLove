@@ -24,8 +24,8 @@ public class PlayerInventory : MonoBehaviour
 
     public LayerMask layerMask;
     public Vector3 itemNewPos;
-    private float timeButton;
-	private float heldTime = 0.250f;
+	public float timeButton;
+	public float heldTime = 0.250f;
 	[HideInInspector] public bool timeButtonStart = false;
     [HideInInspector] public bool itemDropped = false;
     Vector3 tempPos;
@@ -104,7 +104,7 @@ public class PlayerInventory : MonoBehaviour
     private bool _normalRotation = false;
     private void OnDrawGizmos()
     {
-            Gizmos.DrawSphere(tempPos, 0.3f);
+            Gizmos.DrawSphere(tempPos, 0.1f);
     }
 
     //RayCast
@@ -254,9 +254,11 @@ public class PlayerInventory : MonoBehaviour
         rb.AddForce(PlayerCamera.transform.TransformDirection(Vector3.forward), ForceMode.Impulse);
         RemoveItem(CurrentItem);
     }
+    private Vector3 _lastTempPos = Vector3.zero;
     private void ItemPut()
     {
-        SetItemNewPos(tempPos);
+        if (_lastTempPos != tempPos)
+            SetItemNewPos(tempPos);
         GameObject origObj = CurrentItem.OriginalObject;
         origObj.transform.position = itemNewPos;
         origObj.SetActive(true);
@@ -302,13 +304,15 @@ public class PlayerInventory : MonoBehaviour
 
     private void SetItemNewPos(Vector3 h)
     {
+        _lastTempPos = tempPos;
+		//itemNewPos = new Vector3(h.x, h.y + CurrentItem.OriginalObject.transform.lossyScale.y / 2, h.z);
+
         if (CurrentItem.OriginalObject.GetComponent<BoxCollider>() != null)
         {
             itemNewPos = new Vector3(
             h.x,
-            h.y + CurrentItem.OriginalObject.transform.localScale.y / 2f,
+            h.y /*+ CurrentItem.OriginalObject.transform.localScale.y / 2f*/,
             h.z
-
             );
         }
         else if (CurrentItem.OriginalObject.GetComponent<CapsuleCollider>() != null)

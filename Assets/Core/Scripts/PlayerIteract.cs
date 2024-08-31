@@ -40,7 +40,6 @@ public class PlayerIteract : MonoBehaviour
 			if (hit.transform.gameObject.tag == "Iteract")
 			{
 				float distance = Vector3.Distance(transform.position, hit.transform.transform.position);
-
 				if (distance < closestDistance)
 				{
 					IterctObj = hit.transform.gameObject;
