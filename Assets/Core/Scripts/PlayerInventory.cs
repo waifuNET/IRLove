@@ -311,7 +311,7 @@ public class PlayerInventory : MonoBehaviour
         {
             itemNewPos = new Vector3(
             h.x,
-            h.y /*+ CurrentItem.OriginalObject.transform.localScale.y / 2f*/,
+            h.y + CurrentItem.OriginalObject.transform.localScale.y / 2f,
             h.z
             );
         }

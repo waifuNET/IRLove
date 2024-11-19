@@ -29,8 +29,8 @@ public class DialogueElement
 }
 /* TO DO: ✓ 1.We have to fix Decoding every time when pressing E key, added new bool param to
  *          detect dialogue beginnig. ✓
- *        2.Have to change system of detecting activating buttonchoces. 
- *        3.Making visual bug fixed activating and disabling text and name menu.
+ *        ✓ 2.Have to change system of detecting activating buttonchoces. ✓
+ *        ✓ 3.Making visual bug fixed activating and disabling text and name menu. ✓
  */
 
 public class DialogueInit : MonoBehaviour
